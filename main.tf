@@ -29,6 +29,7 @@ resource "google_compute_forwarding_rule" "default" {
   load_balancing_scheme = "INTERNAL"
   backend_service       = "${google_compute_region_backend_service.default.self_link}"
   ip_address            = "${var.ip_address}"
+  ip_protocol           = "${var.ip_protocol}"
   ports                 = ["${var.ports}"]
 }
 
@@ -36,7 +37,7 @@ resource "google_compute_region_backend_service" "default" {
   project          = "${var.project}"
   name             = "${var.name}"
   region           = "${var.region}"
-  protocol         = "TCP"
+  protocol         = "${var.ip_protocol}"
   timeout_sec      = 10
   session_affinity = "${var.session_affinity}"
   backend          = ["${var.backends}"]
@@ -58,7 +59,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
   network = "${data.google_compute_network.network.name}"
 
   allow {
-    protocol = "tcp"
+    protocol = "${lower(var.ip_protocol)}"
     ports    = ["${var.ports}"]
   }
 

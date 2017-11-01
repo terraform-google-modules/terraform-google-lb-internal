@@ -66,3 +66,8 @@ variable ip_address {
   description = "IP address of the internal load balancer, if empty one will be assigned. Default is empty."
   default     = ""
 }
+
+variable ip_protocol {
+  description = "The IP protocol for the backend and frontend forwarding rule. TCP or UDP."
+  default = "TCP"
+}
