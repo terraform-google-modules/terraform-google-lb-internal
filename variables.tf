@@ -29,6 +29,11 @@ variable network {
   default     = "default"
 }
 
+variable network_project {
+  description = "Name of the project for the network. Useful for shared VPC. Default is var.project."
+  default = ""
+}
+
 variable name {
   description = "Name for the forwarding rule and prefix for supporting resources."
 }

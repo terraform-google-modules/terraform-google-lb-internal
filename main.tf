@@ -18,7 +18,7 @@
 # Using a data source here to access both self_link and name by looking up the network name.
 data "google_compute_network" "network" {
   name    = "${var.network}"
-  project = "${var.project}"
+  project = "${var.network_project == "" ? var.project : var.network_project}"
 }
 
 resource "google_compute_forwarding_rule" "default" {
@@ -54,7 +54,7 @@ resource "google_compute_health_check" "default" {
 }
 
 resource "google_compute_firewall" "default-ilb-fw" {
-  project = "${var.project}"
+  project = "${var.network_project == "" ? var.project : var.network_project}"
   name    = "${var.name}-ilb-fw"
   network = "${data.google_compute_network.network.name}"
 
@@ -68,7 +68,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
 }
 
 resource "google_compute_firewall" "default-hc" {
-  project = "${var.project}"
+  project = "${var.network_project == "" ? var.project : var.network_project}"
   name    = "${var.name}-hc"
   network = "${data.google_compute_network.network.name}"
 
