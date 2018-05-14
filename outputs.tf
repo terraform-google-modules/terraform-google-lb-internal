@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 output ip_address {
   description = "The internal IP assigned to the regional fowarding rule."
   value       = "${google_compute_forwarding_rule.default.ip_address}"

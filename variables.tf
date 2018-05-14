@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 variable project {
   description = "The project to deploy to, if not set the default provider project is used."
   default     = ""
@@ -29,9 +29,14 @@ variable network {
   default     = "default"
 }
 
+variable subnetwork {
+  description = "Name of the subnetwork to create resources in."
+  default     = "default"
+}
+
 variable network_project {
   description = "Name of the project for the network. Useful for shared VPC. Default is var.project."
-  default = ""
+  default     = ""
 }
 
 variable name {
@@ -74,5 +79,5 @@ variable ip_address {
 
 variable ip_protocol {
   description = "The IP protocol for the backend and frontend forwarding rule. TCP or UDP."
-  default = "TCP"
+  default     = "TCP"
 }

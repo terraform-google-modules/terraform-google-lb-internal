@@ -21,11 +21,17 @@ data "google_compute_network" "network" {
   project = "${var.network_project == "" ? var.project : var.network_project}"
 }
 
+data "google_compute_subnetwork" "network" {
+  name    = "${var.subnetwork}"
+  project = "${var.network_project == "" ? var.project : var.network_project}"
+}
+
 resource "google_compute_forwarding_rule" "default" {
   project               = "${var.project}"
   name                  = "${var.name}"
   region                = "${var.region}"
   network               = "${data.google_compute_network.network.self_link}"
+  subnetwork            = "${data.google_compute_subnetwork.network.self_link}"
   load_balancing_scheme = "INTERNAL"
   backend_service       = "${google_compute_region_backend_service.default.self_link}"
   ip_address            = "${var.ip_address}"
