@@ -58,6 +58,11 @@ variable ports {
   type        = "list"
 }
 
+variable http_health_check {
+  description = "Set to true if health check is type http, otherwise health check is tcp."
+  default     = false
+}
+
 variable health_port {
   description = "Port to perform health checks on."
 }

@@ -47,14 +47,25 @@ resource "google_compute_region_backend_service" "default" {
   timeout_sec      = 10
   session_affinity = "${var.session_affinity}"
   backend          = ["${var.backends}"]
-  health_checks    = ["${google_compute_health_check.default.self_link}"]
+  health_checks    = ["${element(compact(concat(google_compute_health_check.tcp.*.self_link,google_compute_health_check.http.*.self_link)), 0)}"]
 }
 
-resource "google_compute_health_check" "default" {
+resource "google_compute_health_check" "tcp" {
+  count = "${var.http_health_check ? 0 : 1}"
   project = "${var.project}"
   name    = "${var.name}-hc"
 
   tcp_health_check {
+    port = "${var.health_port}"
+  }
+}
+
+resource "google_compute_health_check" "http" {
+  count = "${var.http_health_check ? 1 : 0}"
+  project = "${var.project}"
+  name    = "${var.name}-hc"
+
+  http_health_check {
     port = "${var.health_port}"
   }
 }
