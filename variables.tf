@@ -67,6 +67,10 @@ variable health_port {
   description = "Port to perform health checks on."
 }
 
+variable http_health_check_request_path {
+  description = "Request path to perform http health check on."
+}
+
 variable source_tags {
   description = "List of source tags for traffic between the internal load balancer."
   type        = "list"

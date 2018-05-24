@@ -66,7 +66,8 @@ resource "google_compute_health_check" "http" {
   name    = "${var.name}-hc"
 
   http_health_check {
-    port = "${var.health_port}"
+    port = "${var.health_port}",
+    request_path = "${var.http_health_check_request_path}"
   }
 }
 
