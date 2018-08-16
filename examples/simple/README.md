@@ -24,7 +24,7 @@ terraform apply
 Open URL of load balancer in browser:
 
 ```
-EXTERNAL_IP=$(terraform output -module gce-lb-fr | grep external_ip | cut -d = -f2 | xargs echo -n)
+EXTERNAL_IP=$(terraform output -module gce-lb-fr external_ip)
 open http://${EXTERNAL_IP}
 ```
 
