@@ -31,7 +31,8 @@ provider google {
 }
 
 module "gce-lb-fr" {
-  source       = "github.com/GoogleCloudPlatform/terraform-google-lb"
+  source       = "GoogleCloudPlatform/lb/google"
+  version      = "1.0.2"
   region       = "${var.region}"
   network      = "${var.network}"
   name         = "group1-lb"
