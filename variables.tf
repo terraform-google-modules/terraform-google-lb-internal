@@ -48,6 +48,12 @@ variable backends {
   type        = "list"
 }
 
+variable host {
+  description = "HTTP header containing the host to reach for the http check, leave blank to use default value"
+  type       = "string"
+  default    = ""
+}
+
 variable session_affinity {
   description = "The session affinity for the backends example: NONE, CLIENT_IP. Default is `NONE`."
   default     = "NONE"

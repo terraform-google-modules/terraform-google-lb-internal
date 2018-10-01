@@ -67,6 +67,7 @@ resource "google_compute_health_check" "http" {
 
   http_health_check {
     port = "${var.health_port}"
+    host = "${var.host}"
   }
 }
 
