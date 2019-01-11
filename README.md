@@ -4,7 +4,7 @@ Modular Internal Load Balancer for GCE using forwarding rules.
 
 ## Usage
 
-```ruby
+```hcl
 module "gce-ilb" {
   source         = "GoogleCloudPlatform/lb-internal/google"
   region         = "${var.region}"
@@ -23,29 +23,29 @@ module "gce-ilb" {
 ## Testing
 
 This module comes packaged with tests with the goal of exercising the module in
-various forms. In order to exercise them, you need the following:
+various forms. To execute them, you need the following:
 
-1. A project in Google Cloud Platform.
-2. An IAM user with credentials downloaded locally and set with the
-  `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+1. A project in GCP with the `compute.googleapis.com` API enabled.
+2. An IAM user with credentials downloaded locally. The
+  `GOOGLE_APPLICATION_CREDENTIALS` environment variable should point to its
+  path.
 3. The following roles attached to that IAM user:
     ```text
     roles/compute.networkAdmin
     roles/compute.loadBalancerAdmin
+    roles/compute.securityAdmin
     ```
-4. A workstation with `docker` installed and running.
+4. The `docker` daemon installed and running.
 
-To run the tests, build a docker container using the following:
+To run the test suites:
 
-```bash
-  make docker_build_all
-```
-
-Run the tests within a container with the following:
-
-```bash
-  make test_integration_docker
-```
+1. configure them by populating `terraform.tfvars` using the colocated
+  `terraform.tfvars.example` as an example. If this file is not present before
+  running tests, the setup process will attempt to provide values.
+2. Run the tests with following command:
+    ```bash
+      make test_integration_docker
+    ```
 
 ## Resources created
 
@@ -59,6 +59,9 @@ Run the tests within a container with the following:
   Firewall rule that allows traffic from the `source_tags` resources to `target_tags` on the `service_port`.
 - [`google_compute_firewall.default-hc`](https://www.terraform.io/docs/providers/google/r/compute_firewall.html):
   Firewall rule that allows traffic for health checks to the `target_tags` resources.
+
+[^]: (autogen_docs_start)
+
 
 ## Inputs
 
@@ -85,3 +88,5 @@ Run the tests within a container with the following:
 | Name | Description |
 |------|-------------|
 | ip_address | The internal IP assigned to the regional fowarding rule. |
+
+[^]: (autogen_docs_end)

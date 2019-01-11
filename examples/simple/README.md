@@ -29,3 +29,16 @@ open http://${EXTERNAL_IP}
 ```
 
 You should see the instance details from `group2` proxied through `group1` and the internal load balancer.
+
+[^]: (autogen_docs_start)
+
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| network |  | string | `default` | no |
+| region |  | string | `us-central1` | no |
+| zone |  | string | `us-central1-b` | no |
+
+[^]: (autogen_docs_end)
