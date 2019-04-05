@@ -37,6 +37,7 @@ resource "google_compute_forwarding_rule" "default" {
   ip_address            = "${var.ip_address}"
   ip_protocol           = "${var.ip_protocol}"
   ports                 = ["${var.ports}"]
+  service_label         = "${var.service_label}"
 }
 
 resource "google_compute_region_backend_service" "default" {
@@ -51,7 +52,7 @@ resource "google_compute_region_backend_service" "default" {
 }
 
 resource "google_compute_health_check" "tcp" {
-  count = "${var.http_health_check ? 0 : 1}"
+  count   = "${var.http_health_check ? 0 : 1}"
   project = "${var.project}"
   name    = "${var.name}-hc"
 
@@ -61,7 +62,7 @@ resource "google_compute_health_check" "tcp" {
 }
 
 resource "google_compute_health_check" "http" {
-  count = "${var.http_health_check ? 1 : 0}"
+  count   = "${var.http_health_check ? 1 : 0}"
   project = "${var.project}"
   name    = "${var.name}-hc"
 

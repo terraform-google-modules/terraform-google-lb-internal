@@ -86,3 +86,9 @@ variable ip_protocol {
   description = "The IP protocol for the backend and frontend forwarding rule. TCP or UDP."
   default     = "TCP"
 }
+
+variable "service_label" {
+  description = "Service label is used to create internal DNS name"
+  default     = "srv"
+}
+
