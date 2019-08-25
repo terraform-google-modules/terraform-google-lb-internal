@@ -14,47 +14,55 @@
  * limitations under the License.
  */
 
-variable region {
-  default = "us-central1"
+variable region {}
+variable network {}
+variable zone {}
+variable "service_port" {}
+variable "target_tags" {
+  type    = list
+  default = []
+}
+variable "subnetwork" {}
+variable "service_account" {}
+
+
+
+
+variable "service_port" {
+  default = "80"
 }
 
-variable network {
-  default = "default"
-}
-
-variable zone {
-  default = "us-central1-b"
-}
-
-provider google {
-  region = "${var.region}"
+variable "service_account" {
+  default = "test"
 }
 
 module "gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
-  version      = "1.0.2"
-  region       = "${var.region}"
-  network      = "${var.network}"
+  version      = "~> 2.0"
+  region       = var.region
+  network      = var.network
   name         = "group1-lb"
-  service_port = "${module.mig1.service_port}"
-  target_tags  = ["${module.mig1.target_tags}"]
+  service_port = var.service_port
+  target_tags  = var.target_tags
 }
+
+
 
 module "gce-ilb" {
   source      = "../../"
-  region      = "${var.region}"
+  region      = var.region
   name        = "group-ilb"
-  ports       = ["${module.mig2.service_port}"]
-  health_port = "${module.mig2.service_port}"
-  source_tags = ["${module.mig1.target_tags}"]
-  target_tags = ["${module.mig2.target_tags}", "${module.mig3.target_tags}"]
+  ports       = [var.service_port]
+  health_port = var.service_port
+  source_tags = [var.target_tags]
+  target_tags = [var.target_tags, var.target_tags]
 
-  backends = [
+  backend = [
     {
-      group = "${module.mig2.instance_group}"
+      group = module.mig2.instance_group
     },
     {
-      group = "${module.mig3.instance_group}"
+      group = module.mig3.instance_group
     },
   ]
 }

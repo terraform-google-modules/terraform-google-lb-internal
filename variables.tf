@@ -43,9 +43,9 @@ variable name {
   description = "Name for the forwarding rule and prefix for supporting resources."
 }
 
-variable backends {
+variable backend {
   description = "List of backends, should be a map of key-value pairs for each backend, must have the 'group' key."
-  type        = "list"
+  type        = list
 }
 
 variable session_affinity {
@@ -55,26 +55,44 @@ variable session_affinity {
 
 variable ports {
   description = "List of ports range to forward to backend services. Max is 5."
-  type        = "list"
+  type        = list
 }
 
-variable http_health_check {
-  description = "Set to true if health check is type HTTP, otherwise health check is TCP."
-  default     = false
+variable "health_check" {
+  type = object({
+    type                = string
+    check_interval_sec  = number
+    healthy_threshold   = number
+    timeout_sec         = number
+    unhealthy_threshold = number
+    response            = string
+    proxy_header        = string
+    health_port         = number
+  })
+  default = null
 }
-
-variable health_port {
-  description = "Port to perform health checks on."
+variable "http_health_check" {
+  type = object({
+    type                = string
+    check_interval_sec  = number
+    healthy_threshold   = number
+    timeout_sec         = string
+    unhealthy_threshold = string
+    response            = string
+    proxy_header        = string
+    health_port         = number
+  })
+  default = null
 }
 
 variable source_tags {
   description = "List of source tags for traffic between the internal load balancer."
-  type        = "list"
+  type        = list
 }
 
 variable target_tags {
   description = "List of target tags for traffic between the internal load balancer."
-  type        = "list"
+  type        = list
 }
 
 variable ip_address {

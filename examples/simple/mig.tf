@@ -14,66 +14,45 @@
  * limitations under the License.
  */
 
-data "template_file" "group1-startup-script" {
-  template = "${file("${format("%s/nginx_upstream.sh.tpl", path.module)}")}"
 
-  vars {
-    UPSTREAM = "${module.gce-ilb.ip_address}"
-  }
+module "instance_template1" {
+  source          = "terraform-google-modules/vm/google//modules/instance_template"
+  version         = "1.0.0"
+  subnetwork      = var.subnetwork
+  service_account = var.service_account
+  startup_script  = templatefile("${path.module}/nginx_upstream.sh.tpl", { UPSTREAM = module.gce-ilb.ip_address })
 }
-
-data "template_file" "group2-startup-script" {
-  template = "${file("${format("%s/gceme.sh.tpl", path.module)}")}"
-
-  vars {
-    PROXY_PATH = ""
-  }
-}
-
-data "template_file" "group3-startup-script" {
-  template = "${file("${format("%s/gceme.sh.tpl", path.module)}")}"
-
-  vars {
-    PROXY_PATH = ""
-  }
+module "instance_template2" {
+  source          = "terraform-google-modules/vm/google//modules/instance_template"
+  version         = "1.0.0"
+  subnetwork      = var.subnetwork
+  service_account = var.service_account
+  startup_script  = templatefile("${path.module}/gceme.sh.tpl", { PROXY_PATH = "" })
 }
 
 module "mig1" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.13"
-  region            = "${var.region}"
-  zone              = "${var.zone}"
-  name              = "group1"
-  size              = 2
-  target_tags       = ["allow-group1"]
-  target_pools      = ["${module.gce-lb-fr.target_pool}"]
-  service_port      = 80
-  service_port_name = "http"
-  startup_script    = "${data.template_file.group1-startup-script.rendered}"
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "1.0.0"
+  region            = var.region
+  target_pools      = [module.gce-lb-fr.target_pool]
+  instance_template = module.instance_template1.self_link
+  hostname          = "mig1"
+
 }
 
 module "mig2" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.13"
-  region            = "${var.region}"
-  zone              = "us-central1-c"
-  name              = "group2"
-  size              = 2
-  target_tags       = ["allow-group2"]
-  service_port      = 80
-  service_port_name = "http"
-  startup_script    = "${data.template_file.group2-startup-script.rendered}"
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "1.0.0"
+  region            = var.region
+  hostname          = "mig2"
+  instance_template = module.instance_template2.self_link
+
 }
 
 module "mig3" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.13"
-  region            = "${var.region}"
-  zone              = "us-central1-f"
-  name              = "group3"
-  size              = 2
-  target_tags       = ["allow-group3"]
-  service_port      = 80
-  service_port_name = "http"
-  startup_script    = "${data.template_file.group3-startup-script.rendered}"
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "1.0.0"
+  region            = var.region
+  hostname          = "mig3"
+  instance_template = module.instance_template2.self_link
 }
