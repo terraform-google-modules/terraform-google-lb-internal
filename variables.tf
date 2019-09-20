@@ -44,7 +44,7 @@ variable name {
 }
 
 variable backends {
-  description = "List of backends, should be a map of key-value pairs for each backend, mush have the 'group' key."
+  description = "List of backends, should be a map of key-value pairs for each backend, must have the 'group' key."
   type        = "list"
 }
 
@@ -59,7 +59,7 @@ variable ports {
 }
 
 variable http_health_check {
-  description = "Set to true if health check is type http, otherwise health check is tcp."
+  description = "Set to true if health check is type HTTP, otherwise health check is TCP."
   default     = false
 }
 
