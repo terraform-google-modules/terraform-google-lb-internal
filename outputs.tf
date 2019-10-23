@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-output ip_address {
+output "ip_address" {
   description = "The internal IP assigned to the regional fowarding rule."
-  value       = "${google_compute_forwarding_rule.default.ip_address}"
+  value       = google_compute_forwarding_rule.default.ip_address
 }
