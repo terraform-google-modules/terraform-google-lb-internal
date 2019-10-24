@@ -15,52 +15,58 @@
  */
 
 variable "region" {
-  type = "string"
+  description = "Region for cloud resources."
+  type        = "string"
 }
 
 variable "network" {
-  type = "string"
-}
-
-variable "zone" {
-  type = "string"
+  description = "Name of the network to create resources in."
+  type        = "string"
 }
 
 variable "service_port" {
-  type = "string"
+  description = "TCP port your service is listening on."
+  type        = "string"
 }
 
 variable "target_tags" {
-  type    = list(string)
-  default = []
+  description = "List of target tags for traffic between the internal load balancer."
+  type        = list(string)
+  default     = []
 }
 
 variable "source_tags" {
-  type    = list(string)
-  default = []
+  description = "List of source tags for traffic between the internal load balancer."
+  type        = list(string)
+  default     = []
 }
 
 variable "subnetwork" {
-  type = "string"
+  description = "Name of the subnetwork to create resources in."
+  type        = "string"
 }
 
 variable "service_account" {
-  type = object({
+  description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
+  type        = object({
     email  = string
     scopes = set(string)
   })
 }
 
 variable "subnetwork_project" {
-  type = "string"
+  description = "Name of the project for the subnetwork. Useful for shared VPC."
+  type        = "string"
 }
 
 variable "project" {
-  type = "string"
+  description = "The project id to deploy to"
+  type        = "string"
 }
 
 variable "health_check" {
-  type = object({
+  description = "Health check to determine whether instances are responsive and able to do work"
+  type        = object({
     type                = string
     check_interval_sec  = number
     healthy_threshold   = number
