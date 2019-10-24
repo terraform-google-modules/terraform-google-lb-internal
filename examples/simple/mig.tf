@@ -43,6 +43,7 @@ module "mig1" {
   target_pools       = [module.gce-lb-fr.target_pool]
   instance_template  = module.instance_template1.self_link
   hostname           = "mig1"
+  named_ports        = local.named_ports
 }
 
 module "mig2" {

@@ -9,10 +9,10 @@ module "gce-ilb" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   region       = var.region
   name         = "group2-ilb"
-  ports        = [var.service_port]
+  ports        = ["80"]
   health_check = var.health_check
-  source_tags  = var.source_tags
-  target_tags  = var.target_tags
+  source_tags  = ["source-instance"]
+  target_tags  = ["target-instance"]
   backends     = [
     { group = module.mig2.instance_group },
     { group = module.mig3.instance_group },

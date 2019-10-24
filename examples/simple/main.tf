@@ -25,17 +25,17 @@ module "gce-lb-fr" {
   network      = var.network
   project      = var.project
   name         = "group1-lb"
-  service_port = var.service_port
-  target_tags  = var.target_tags
+  service_port = local.named_ports[0].port
+  target_tags  = local.target_tags
 }
 
 module "gce-ilb" {
   source       = "../../"
   region       = var.region
   name         = "group-ilb"
-  ports        = [var.service_port]
-  source_tags  = var.source_tags
-  target_tags  = var.target_tags
+  ports        = [local.named_ports[0].port]
+  source_tags  = local.source_tags
+  target_tags  = local.target_tags
   health_check = var.health_check
 
   backends = [

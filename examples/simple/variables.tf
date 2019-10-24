@@ -24,23 +24,6 @@ variable "network" {
   type        = "string"
 }
 
-variable "service_port" {
-  description = "TCP port your service is listening on."
-  type        = "string"
-}
-
-variable "target_tags" {
-  description = "List of target tags for traffic between the internal load balancer."
-  type        = list(string)
-  default     = []
-}
-
-variable "source_tags" {
-  description = "List of source tags for traffic between the internal load balancer."
-  type        = list(string)
-  default     = []
-}
-
 variable "subnetwork" {
   description = "Name of the subnetwork to create resources in."
   type        = "string"
