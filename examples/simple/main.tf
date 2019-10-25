@@ -26,7 +26,7 @@ module "gce-lb-fr" {
   project      = var.project
   name         = "group1-lb"
   service_port = local.named_ports[0].port
-  target_tags  = local.target_tags
+  target_tags  = ["allow-group1"]
 }
 
 module "gce-ilb" {
@@ -34,8 +34,8 @@ module "gce-ilb" {
   region       = var.region
   name         = "group-ilb"
   ports        = [local.named_ports[0].port]
-  source_tags  = local.source_tags
-  target_tags  = local.target_tags
+  source_tags  = ["allow-group1"]
+  target_tags  = ["allow-group2", "allow-group3"]
   health_check = local.health_check
 
   backends = [

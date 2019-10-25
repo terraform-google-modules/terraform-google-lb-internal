@@ -22,6 +22,7 @@ module "instance_template1" {
   subnetwork_project = var.subnetwork_project
   service_account    = var.service_account
   startup_script     = templatefile("${path.module}/nginx_upstream.sh.tpl", { UPSTREAM = module.gce-ilb.ip_address })
+  tags               = ["allow-group1"]
 }
 
 module "instance_template2" {
@@ -32,6 +33,18 @@ module "instance_template2" {
   subnetwork_project = var.subnetwork_project
   service_account    = var.service_account
   startup_script     = templatefile("${path.module}/gceme.sh.tpl", { PROXY_PATH = "" })
+  tags               = ["allow-group2"]
+}
+
+module "instance_template3" {
+  source             = "terraform-google-modules/vm/google//modules/instance_template"
+  version            = "~> 1.1"
+  project_id         = var.project
+  subnetwork         = var.subnetwork
+  subnetwork_project = var.subnetwork_project
+  service_account    = var.service_account
+  startup_script     = templatefile("${path.module}/gceme.sh.tpl", { PROXY_PATH = "" })
+  tags               = ["allow-group3"]
 }
 
 module "mig1" {
@@ -54,6 +67,7 @@ module "mig2" {
   region             = var.region
   hostname           = "mig2"
   instance_template  = module.instance_template2.self_link
+  named_ports        = local.named_ports
 }
 
 module "mig3" {
@@ -63,5 +77,6 @@ module "mig3" {
   subnetwork_project = var.subnetwork_project
   region             = var.region
   hostname           = "mig3"
-  instance_template  = module.instance_template2.self_link
+  instance_template  = module.instance_template3.self_link
+  named_ports        = local.named_ports
 }

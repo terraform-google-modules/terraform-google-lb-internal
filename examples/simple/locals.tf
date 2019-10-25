@@ -19,8 +19,6 @@ locals {
     name = "http"
     port = 80
   }]
-  target_tags = ["target-instance"]
-  source_tags = ["source-instance"]
   health_check = {
     type                = "http"
     check_interval_sec  = 1
