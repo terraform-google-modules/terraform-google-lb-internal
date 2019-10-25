@@ -18,8 +18,8 @@ module "gce-ilb" {
   name         = "group2-ilb"
   ports        = ["80"]
   health_check = var.health_check
-  source_tags  = ["source-instance"]
-  target_tags  = ["target-instance"]
+  source_tags  = ["allow-group1"]
+  target_tags  = ["allow-group2", "allow-group3"]
   backends     = [
     { group = module.mig2.instance_group },
     { group = module.mig3.instance_group },
