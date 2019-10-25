@@ -40,10 +40,12 @@ module "gce-ilb" {
 
   backends = [
     {
-      group = module.mig2.instance_group
+      group       = module.mig2.instance_group
+      description = ""
     },
     {
-      group = module.mig3.instance_group
+      group       = module.mig3.instance_group
+      description = ""
     },
   ]
 }

@@ -20,8 +20,8 @@ module "gce-ilb" {
   source_tags       = ["allow-group1"]
   target_tags       = ["allow-group2", "allow-group3"]
   backends          = [
-    { group = "${module.mig2.instance_group}" },
-    { group = "${module.mig3.instance_group}" },
+    { group = "${module.mig2.instance_group}", description = "" },
+    { group = "${module.mig3.instance_group}", description = "" },
   ]
 }
 ```
@@ -51,8 +51,8 @@ module "gce-ilb" {
   source_tags  = ["allow-group1"]
   target_tags  = ["allow-group2", "allow-group3"]
   backends     = [
-    { group = module.mig2.instance_group },
-    { group = module.mig3.instance_group },
+    { group = module.mig2.instance_group, description = "" },
+    { group = module.mig3.instance_group, description = "" },
   ]
 }
 ```

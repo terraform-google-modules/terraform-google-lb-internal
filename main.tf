@@ -49,7 +49,8 @@ resource "google_compute_region_backend_service" "default" {
   dynamic "backend" {
     for_each = var.backends
     content {
-      group = lookup(backend.value, "group", null)
+      group       = lookup(backend.value, "group", null)
+      description = lookup(backend.value, "description", null)
     }
   }
   health_checks = [element(
