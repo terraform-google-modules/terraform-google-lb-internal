@@ -36,7 +36,7 @@ module "gce-ilb" {
   ports        = [local.named_ports[0].port]
   source_tags  = local.source_tags
   target_tags  = local.target_tags
-  health_check = var.health_check
+  health_check = local.health_check
 
   backends = [
     {

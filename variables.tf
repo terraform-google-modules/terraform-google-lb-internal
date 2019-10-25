@@ -60,7 +60,7 @@ variable "ports" {
 
 variable "health_check" {
   description = "Health check to determine whether instances are responsive and able to do work"
-  type        = object({
+  type = object({
     type                = string
     check_interval_sec  = number
     healthy_threshold   = number

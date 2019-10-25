@@ -2,11 +2,18 @@
 
 Modular Internal Load Balancer for GCE using forwarding rules.
 
+## Upgrading
+
+The current version is 2.X. The following guides are available to assist with upgrades:
+
+- [1.X -> 2.0](./docs/upgrading_to_lb_internal_v2.0.md)
+
 ## Usage
 
 ```hcl
 module "gce-ilb" {
-  source       = "GoogleCloudPlatform/lb-internal/google"
+  source       = "terraform-google-modules/lb-internal/google"
+  version      = "~> 2.0"
   region       = var.region
   name         = "group2-ilb"
   ports        = ["80"]

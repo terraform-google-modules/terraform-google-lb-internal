@@ -31,7 +31,7 @@ variable "subnetwork" {
 
 variable "service_account" {
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
-  type        = object({
+  type = object({
     email  = string
     scopes = set(string)
   })
@@ -45,21 +45,4 @@ variable "subnetwork_project" {
 variable "project" {
   description = "The project id to deploy to"
   type        = "string"
-}
-
-variable "health_check" {
-  description = "Health check to determine whether instances are responsive and able to do work"
-  type        = object({
-    type                = string
-    check_interval_sec  = number
-    healthy_threshold   = number
-    timeout_sec         = number
-    unhealthy_threshold = number
-    response            = string
-    proxy_header        = string
-    health_port         = number
-    port_name           = string
-    request_path        = string
-    host                = string
-  })
 }
