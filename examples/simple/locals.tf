@@ -27,7 +27,7 @@ locals {
     unhealthy_threshold = 5
     response            = "I AM HEALTHY"
     proxy_header        = "NONE"
-    health_port         = 80
+    port                = 80
     port_name           = "health-check-port"
     request_path        = "/mypath"
     host                = "1.2.3.4"

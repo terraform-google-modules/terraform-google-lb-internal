@@ -68,7 +68,7 @@ variable "health_check" {
     unhealthy_threshold = number
     response            = string
     proxy_header        = string
-    health_port         = number
+    port                = number
     port_name           = string
     request_path        = string
     host                = string

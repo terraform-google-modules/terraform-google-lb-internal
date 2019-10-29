@@ -70,7 +70,7 @@ resource "google_compute_health_check" "tcp" {
   name    = "${var.name}-hc"
 
   tcp_health_check {
-    port         = var.health_check["health_port"]
+    port         = var.health_check["port"]
     response     = var.health_check["response"]
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
@@ -88,7 +88,7 @@ resource "google_compute_health_check" "http" {
   unhealthy_threshold = var.health_check["unhealthy_threshold"]
 
   http_health_check {
-    port         = var.health_check["health_port"]
+    port         = var.health_check["port"]
     request_path = var.health_check["request_path"]
     host         = var.health_check["host"]
     response     = var.health_check["response"]
@@ -118,7 +118,7 @@ resource "google_compute_firewall" "default-hc" {
 
   allow {
     protocol = "tcp"
-    ports    = [var.health_check["health_port"]]
+    ports    = [var.health_check["port"]]
   }
 
   source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
