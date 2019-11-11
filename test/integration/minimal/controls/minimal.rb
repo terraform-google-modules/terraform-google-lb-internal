@@ -14,9 +14,9 @@
 
 require 'json'
 
-project_id = input('project_id')
-region = input('region')
-random_suffix = input('random_suffix')
+project_id = attribute('project_id')
+region = attribute('region')
+random_suffix = attribute('random_suffix')
 resource_name_prefix = "ilb-minimal-#{random_suffix}"
 gcloud_args = "--format json --project #{project_id}"
 
