@@ -22,9 +22,9 @@ attributes:
   - name: project_id
     required: true
     type: string
-#  - name: random_suffix
-#    required: true
-#    type: string
+  - name: random_suffix
+    required: true
+    type: string
   - name: region
     required: true
     type: string
