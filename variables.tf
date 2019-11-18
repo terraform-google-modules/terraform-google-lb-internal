@@ -97,6 +97,7 @@ variable "ip_protocol" {
 
 variable "service_label" {
   description = "Service label is used to create internal DNS name"
-  default     = "srv"
+  default     = null
+  type        = string
 }
 
