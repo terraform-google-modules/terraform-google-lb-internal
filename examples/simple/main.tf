@@ -1,11 +1,11 @@
-/*
- * Copyright 2017 Google Inc.
+/**
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,47 +14,38 @@
  * limitations under the License.
  */
 
-variable region {
-  default = "us-central1"
-}
-
-variable network {
-  default = "default"
-}
-
-variable zone {
-  default = "us-central1-b"
-}
-
-provider google {
-  region = "${var.region}"
+provider "google" {
+  region = var.region
 }
 
 module "gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
-  version      = "1.0.2"
-  region       = "${var.region}"
-  network      = "${var.network}"
+  version      = "~> 2.0"
+  region       = var.region
+  network      = var.network
+  project      = var.project
   name         = "group1-lb"
-  service_port = "${module.mig1.service_port}"
-  target_tags  = ["${module.mig1.target_tags}"]
+  service_port = local.named_ports[0].port
+  target_tags  = ["allow-group1"]
 }
 
 module "gce-ilb" {
-  source      = "../../"
-  region      = "${var.region}"
-  name        = "group-ilb"
-  ports       = ["${module.mig2.service_port}"]
-  health_port = "${module.mig2.service_port}"
-  source_tags = ["${module.mig1.target_tags}"]
-  target_tags = ["${module.mig2.target_tags}", "${module.mig3.target_tags}"]
+  source       = "../../"
+  region       = var.region
+  name         = "group-ilb"
+  ports        = [local.named_ports[0].port]
+  source_tags  = ["allow-group1"]
+  target_tags  = ["allow-group2", "allow-group3"]
+  health_check = local.health_check
 
   backends = [
     {
-      group = "${module.mig2.instance_group}"
+      group       = module.mig2.instance_group
+      description = ""
     },
     {
-      group = "${module.mig3.instance_group}"
+      group       = module.mig3.instance_group
+      description = ""
     },
   ]
 }

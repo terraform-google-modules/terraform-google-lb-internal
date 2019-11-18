@@ -2,20 +2,35 @@
 
 Modular Internal Load Balancer for GCE using forwarding rules.
 
+## Compatibility
+
+This module is meant for use with Terraform 0.12. If you haven't
+[upgraded](https://www.terraform.io/upgrade-guides/0-12.html) and
+need a Terraform 0.11.x-compatible version of this module, the
+last released version intended for Terraform 0.11.x is
+[1.0.4](https://registry.terraform.io/modules/GoogleCloudPlatform/lb-internal/google/1.0.4).
+
+## Upgrading
+
+The current version is 2.X. The following guides are available to assist with upgrades:
+
+- [1.X -> 2.0](./docs/upgrading_to_lb_internal_v2.0.md)
+
 ## Usage
 
-```ruby
+```hcl
 module "gce-ilb" {
-  source         = "GoogleCloudPlatform/lb-internal/google"
-  region         = "${var.region}"
-  name           = "group2-ilb"
-  ports          = ["${module.mig2.service_port}"]
-  health_port    = "${module.mig2.service_port}"
-  source_tags    = ["${module.mig1.target_tags}"]
-  target_tags    = ["${module.mig2.target_tags}","${module.mig3.target_tags}"]
-  backends       = [
-    { group = "${module.mig2.instance_group}" },
-    { group = "${module.mig3.instance_group}" },
+  source       = "terraform-google-modules/lb-internal/google"
+  version      = "~> 2.0"
+  region       = var.region
+  name         = "group2-ilb"
+  ports        = ["80"]
+  health_check = var.health_check
+  source_tags  = ["allow-group1"]
+  target_tags  = ["allow-group2", "allow-group3"]
+  backends     = [
+    { group = module.mig2.instance_group, description = "" },
+    { group = module.mig3.instance_group, description = "" },
   ]
 }
 ```

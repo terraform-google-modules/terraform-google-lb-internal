@@ -8,14 +8,14 @@ This example creates 3 instance groups. The first group is in us-central1-b and 
 
 ## Set up the environment
 
-```
+```shell
 gcloud auth application-default login
 export GOOGLE_PROJECT=$(gcloud config get-value project)
 ```
 
 ## Run Terraform
 
-```
+```shell
 terraform init
 terraform plan
 terraform apply
@@ -23,7 +23,7 @@ terraform apply
 
 Open URL of load balancer in browser:
 
-```
+```shell
 EXTERNAL_IP=$(terraform output -module gce-lb-fr external_ip)
 open http://${EXTERNAL_IP}
 ```

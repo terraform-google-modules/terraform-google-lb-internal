@@ -14,7 +14,22 @@
  * limitations under the License.
  */
 
-output "ip_address" {
-  description = "The internal IP assigned to the regional forwarding rule."
-  value       = google_compute_forwarding_rule.default.ip_address
+locals {
+  named_ports = [{
+    name = "http"
+    port = 80
+  }]
+  health_check = {
+    type                = "http"
+    check_interval_sec  = 1
+    healthy_threshold   = 4
+    timeout_sec         = 1
+    unhealthy_threshold = 5
+    response            = "I AM HEALTHY"
+    proxy_header        = "NONE"
+    port                = 80
+    port_name           = "health-check-port"
+    request_path        = "/mypath"
+    host                = "1.2.3.4"
+  }
 }
