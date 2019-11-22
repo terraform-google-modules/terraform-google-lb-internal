@@ -55,6 +55,7 @@ resource "google_compute_network" "test" {
 }
 
 resource "google_compute_subnetwork" "test" {
+  project       = var.project_id
   name          = local.resource_name
   network       = google_compute_network.test.name
   region        = var.region
