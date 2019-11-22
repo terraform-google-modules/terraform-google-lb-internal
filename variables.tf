@@ -87,7 +87,7 @@ variable "target_tags" {
 
 variable "ip_address" {
   description = "IP address of the internal load balancer, if empty one will be assigned. Default is empty."
-  default     = ""
+  default     = null
 }
 
 variable "ip_protocol" {
