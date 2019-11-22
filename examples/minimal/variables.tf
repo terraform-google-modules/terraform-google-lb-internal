@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-module "example" {
-  source          = "../../../examples/minimal"
-  region          = var.region
-  project_id      = var.project_id
+variable "project_id" {
+  description = "The project to create test resources within."
+}
+
+variable "region" {
+  description = "Region for cloud resources."
+  default     = "us-central1"
 }
