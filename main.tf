@@ -38,6 +38,7 @@ resource "google_compute_forwarding_rule" "default" {
   ip_address            = var.ip_address
   ip_protocol           = var.ip_protocol
   ports                 = var.ports
+  service_label         = var.service_label
 }
 
 resource "google_compute_region_backend_service" "default" {
