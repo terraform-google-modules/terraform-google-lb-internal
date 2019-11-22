@@ -49,12 +49,6 @@ locals {
   }
 }
 
-resource "google_project_service" "test" {
-  project            = var.project_id
-  service            = "compute.googleapis.com"
-  disable_on_destroy = "false"
-}
-
 resource "google_compute_network" "test" {
   project                 = var.project_id
   name                    = local.resource_name
