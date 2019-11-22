@@ -64,6 +64,7 @@ resource "google_compute_subnetwork" "test" {
 
 module "test_ilb" {
   source = "../../"
+  project      = var.project_id
   network      = google_compute_network.test.name
   subnetwork   = google_compute_subnetwork.test.name
   region       = var.region

@@ -31,6 +31,7 @@ module "gce-lb-fr" {
 
 module "gce-ilb" {
   source = "../../"
+  project      = var.project
   region       = var.region
   name         = "group-ilb"
   ports        = [local.named_ports[0].port]
