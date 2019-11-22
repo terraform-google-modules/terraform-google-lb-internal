@@ -15,7 +15,7 @@
  */
 
 provider "google" {
-  region = var.region
+  version = "~> 2.20"
 }
 
 module "gce-lb-fr" {
@@ -30,7 +30,7 @@ module "gce-lb-fr" {
 }
 
 module "gce-ilb" {
-  source       = "../../"
+  source = "../../"
   region       = var.region
   name         = "group-ilb"
   ports        = [local.named_ports[0].port]

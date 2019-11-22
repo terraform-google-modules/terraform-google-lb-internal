@@ -15,8 +15,7 @@
  */
 
 provider google {
-  project = var.project_id
-  region  = var.region
+  version = "~> 2.20"
 }
 
 provider "random" {
@@ -63,7 +62,7 @@ resource "google_compute_subnetwork" "test" {
 }
 
 module "test_ilb" {
-  source       = "../../"
+  source = "../../"
   network      = google_compute_network.test.name
   subnetwork   = google_compute_subnetwork.test.name
   region       = var.region
