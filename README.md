@@ -1,6 +1,10 @@
 # Internal Load Balancer Terraform Module
-
 Modular Internal Load Balancer for GCE using forwarding rules.
+
+### Load Balancer Types
+* [TCP load balancer](https://github.com/terraform-google-modules/terraform-google-lb)
+* [HTTP/S load balancer](https://github.com/terraform-google-modules/terraform-google-lb-http)
+* **Internal load balancer**
 
 ## Compatibility
 
