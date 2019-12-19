@@ -16,17 +16,17 @@
 
 variable "region" {
   description = "Region for cloud resources."
-  type        = "string"
+  type        = string
 }
 
 variable "network" {
   description = "Name of the network to create resources in."
-  type        = "string"
+  type        = string
 }
 
 variable "subnetwork" {
   description = "Name of the subnetwork to create resources in."
-  type        = "string"
+  type        = string
 }
 
 variable "service_account" {
@@ -39,10 +39,10 @@ variable "service_account" {
 
 variable "subnetwork_project" {
   description = "Name of the project for the subnetwork. Useful for shared VPC."
-  type        = "string"
+  type        = string
 }
 
 variable "project" {
   description = "The project id to deploy to"
-  type        = "string"
+  type        = string
 }

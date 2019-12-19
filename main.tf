@@ -43,7 +43,7 @@ resource "google_compute_forwarding_rule" "default" {
 
 resource "google_compute_region_backend_service" "default" {
   project          = var.project
-  name             = var.name
+  name             = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
   region           = var.region
   protocol         = var.ip_protocol
   timeout_sec      = 10
@@ -55,21 +55,13 @@ resource "google_compute_region_backend_service" "default" {
       description = lookup(backend.value, "description", null)
     }
   }
-  health_checks = [element(
-    compact(
-      concat(
-        google_compute_health_check.tcp.*.self_link,
-        google_compute_health_check.http.*.self_link,
-      ),
-    ),
-    0,
-  )]
+  health_checks = [var.health_check["type"] == "tcp" ? google_compute_health_check.tcp[0].self_link : google_compute_health_check.http[0].self_link]
 }
 
 resource "google_compute_health_check" "tcp" {
   count   = var.health_check["type"] == "tcp" ? 1 : 0
   project = var.project
-  name    = "${var.name}-hc"
+  name    = "${var.name}-hc-tcp"
 
   tcp_health_check {
     port         = var.health_check["port"]
@@ -82,7 +74,7 @@ resource "google_compute_health_check" "tcp" {
 resource "google_compute_health_check" "http" {
   count   = var.health_check["type"] == "http" ? 1 : 0
   project = var.project
-  name    = "${var.name}-hc"
+  name    = "${var.name}-hc-http"
 
   check_interval_sec  = var.health_check["check_interval_sec"]
   healthy_threshold   = var.health_check["healthy_threshold"]
