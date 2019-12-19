@@ -70,7 +70,7 @@ control 'minimal' do
       expect(backend_services[0]['healthChecks'].length).to eq(1)
     end
     it 'is using the healthcheck created by this module' do
-      expect(backend_services[0]['healthChecks'][0]).to end_with "#{resource_name_prefix}-hc"
+      expect(backend_services[0]['healthChecks'][0]).to end_with "#{resource_name_prefix}-hc-http"
     end
 
     it 'has a timeout length of 10 seconds' do
