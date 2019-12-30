@@ -86,6 +86,24 @@ variable "target_tags" {
   type        = list(string)
 }
 
+variable "source_ip_ranges" {
+  description = "List of source ip ranges for traffic between the internal load balancer."
+  type        = list(string)
+  default     = null
+}
+
+variable "source_service_accounts" {
+  description = "List of source service accounts for traffic between the internal load balancer."
+  type        = list(string)
+  default     = null
+}
+
+variable "target_service_accounts" {
+  description = "List of target service accounts for traffic between the internal load balancer."
+  type        = list(string)
+  default     = null
+}
+
 variable "ip_address" {
   description = "IP address of the internal load balancer, if empty one will be assigned. Default is empty."
   default     = null
