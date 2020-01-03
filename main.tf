@@ -65,6 +65,7 @@ resource "google_compute_health_check" "tcp" {
 
   tcp_health_check {
     port         = var.health_check["port"]
+    request      = var.health_check["request"]
     response     = var.health_check["response"]
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]

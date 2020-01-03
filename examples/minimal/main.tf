@@ -39,6 +39,7 @@ locals {
     healthy_threshold   = 4
     timeout_sec         = 1
     unhealthy_threshold = 5
+    request             = ""
     response            = "I AM HEALTHY"
     proxy_header        = "NONE"
     port                = 8081
