@@ -63,8 +63,14 @@ resource "google_compute_health_check" "tcp" {
   project = var.project
   name    = "${var.name}-hc-tcp"
 
+  timeout_sec         = var.health_check["timeout_sec"]
+  check_interval_sec  = var.health_check["check_interval_sec"]
+  healthy_threshold   = var.health_check["healthy_threshold"]
+  unhealthy_threshold = var.health_check["unhealthy_threshold"]
+
   tcp_health_check {
     port         = var.health_check["port"]
+    request      = var.health_check["request"]
     response     = var.health_check["response"]
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
@@ -76,9 +82,9 @@ resource "google_compute_health_check" "http" {
   project = var.project
   name    = "${var.name}-hc-http"
 
+  timeout_sec         = var.health_check["timeout_sec"]
   check_interval_sec  = var.health_check["check_interval_sec"]
   healthy_threshold   = var.health_check["healthy_threshold"]
-  timeout_sec         = var.health_check["timeout_sec"]
   unhealthy_threshold = var.health_check["unhealthy_threshold"]
 
   http_health_check {

@@ -70,6 +70,7 @@ variable "health_check" {
     proxy_header        = string
     port                = number
     port_name           = string
+    request             = string
     request_path        = string
     host                = string
   })
