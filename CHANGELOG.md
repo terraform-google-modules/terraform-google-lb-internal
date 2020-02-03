@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.0.1...v2.1.0) (2020-02-03)
+
+
+### Features
+
+* add options to use service accounts and ip ranges in addition to tags ([#24](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/24)) ([ff10bae](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/ff10baefbbf6e7e5ee18e534df17d567b65a020f))
+
 ## [Unreleased]
 
 ### Added
