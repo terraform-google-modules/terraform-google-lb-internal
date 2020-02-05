@@ -24,7 +24,7 @@ The current version is 2.X. The following guides are available to assist with up
 
 ```hcl
 module "gce-ilb" {
-  source       = "terraform-google-modules/lb-internal/google"
+  source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
   region       = var.region
   name         = "group2-ilb"
