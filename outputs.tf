@@ -19,7 +19,7 @@ output "ip_address" {
   value       = google_compute_forwarding_rule.default.ip_address
 }
 
-output "forwrding_rule" {
+output "forwarding_rule" {
   description = "The forwarding rule self_link."
   value       = google_compute_forwarding_rule.default.self_link
 }
