@@ -18,3 +18,8 @@ output "ip_address" {
   description = "The internal IP assigned to the regional forwarding rule."
   value       = google_compute_forwarding_rule.default.ip_address
 }
+
+output "forwrding_rule" {
+  description = "The forwarding rule self_link."
+  value       = google_compute_forwarding_rule.default.self_link
+}
