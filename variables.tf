@@ -58,6 +58,12 @@ variable "ports" {
   type        = list(string)
 }
 
+variable "all_ports" {
+  description = "Boolean for all_ports setting on forwarding rule."
+  type        = bool
+  default     = null
+}
+
 variable "health_check" {
   description = "Health check to determine whether instances are responsive and able to do work"
   type = object({
