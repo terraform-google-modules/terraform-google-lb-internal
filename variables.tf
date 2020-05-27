@@ -24,6 +24,12 @@ variable "region" {
   default     = "us-central1"
 }
 
+variable "global_access" {
+  description = "Allow all regions on the same VPC network access."
+  type        = bool
+  default     = false
+}
+
 variable "network" {
   description = "Name of the network to create resources in."
   default     = "default"
