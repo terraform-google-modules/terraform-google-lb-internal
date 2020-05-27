@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.1.0...v2.2.0) (2020-05-27)
+
+
+### Features
+
+* Allow global access to internal loadbalancers with var.global_access ([#34](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/34)) ([4c0a9cf](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/4c0a9cf7b4677133ac9158cc4192ddf0a0e6d052))
+* Allow internal tcp load balancers on all ports with var.all_ports ([#30](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/30)) ([2761445](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/276144531017152ddcba1ca02073bfa1844d39bb))
+
+
+### Bug Fixes
+
+* Correct link to module in README ([#27](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/27)) ([eb96515](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/eb96515fdd9f8a6adae5bd44c15adb9e1f0e06fd))
+
 ## [2.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.0.1...v2.1.0) (2020-02-03)
 
 
