@@ -15,7 +15,7 @@
  */
 
 provider "google" {
-  version = "~> 2.20"
+  version = "~> 3.14.0"
 }
 
 module "gce-lb-fr" {
@@ -30,7 +30,7 @@ module "gce-lb-fr" {
 }
 
 module "gce-ilb" {
-  source = "../../"
+  source       = "../../"
   project      = var.project
   region       = var.region
   name         = "group-ilb"

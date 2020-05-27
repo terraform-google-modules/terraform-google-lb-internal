@@ -15,7 +15,7 @@
  */
 
 module "example" {
-  source          = "../../../examples/minimal"
-  region          = var.region
-  project_id      = var.project_id
+  source     = "../../../examples/minimal"
+  region     = var.region
+  project_id = var.project_id
 }
