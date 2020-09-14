@@ -58,7 +58,7 @@ resource "google_compute_forwarding_rule" "default" {
   region                = var.region
   network               = data.google_compute_network.network.self_link
   subnetwork            = data.google_compute_subnetwork.network.self_link
-  target                = length(var.ssl_certificate) == 0 ? google_compute_region_target_http_proxy.default[count.index].id : google_compute_region_target_https_proxy.default[count.index].id
+  target                = length(var.ssl_certificate) == 0 ? google_compute_region_target_http_proxy.default[0].id : google_compute_region_target_https_proxy.default[0].id
   allow_global_access   = var.global_access
   load_balancing_scheme = "INTERNAL_MANAGED"
   ip_address            = var.ip_address
