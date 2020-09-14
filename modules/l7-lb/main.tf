@@ -49,7 +49,7 @@ resource "google_compute_region_url_map" "default" {
   project         = var.project
   region          = var.region
   name            = "${var.name}-internal-lb"
-  default_service = google_compute_region_backend_service.default.self_link
+  default_service = google_compute_region_backend_service.default[keys(var.backends)[0]].self_link
 }
 
 resource "google_compute_forwarding_rule" "default" {
@@ -71,14 +71,15 @@ resource "google_compute_forwarding_rule" "default" {
 
 resource "google_compute_region_backend_service" "default" {
   project          = var.project
-  name             = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
+  for_each         = var.backends
+  name             = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc-${each.key}" : "${var.name}-with-http-hc-${each.key}"
   region           = var.region
   protocol         = var.backend_protocol
   timeout_sec      = 10
   session_affinity = var.session_affinity
   port_name        = var.port_name
   dynamic "backend" {
-    for_each = var.backends
+    for_each = toset(each.value["backend"])
     content {
       group           = lookup(backend.value, "group", null)
       description     = lookup(backend.value, "description", null)
