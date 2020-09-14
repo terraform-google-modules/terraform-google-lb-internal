@@ -24,6 +24,6 @@ output "forwarding_rule" {
   value       = google_compute_forwarding_rule.default.self_link
 }
 
-output "backend_service_link" {
-  value = google_compute_region_backend_service.default.*.self_link
+output "backend_services" {
+  value = google_compute_region_backend_service.default
 }
