@@ -32,7 +32,7 @@ resource "google_compute_region_target_https_proxy" "default" {
   project          = var.project
   region           = var.region
   name             = "${var.name}-internal-https"
-  url_map          = google_compute_region_url_map.default.self_link
+  url_map          = var.create_url_map ? google_compute_region_url_map.default[0].self_link : var.url_map
   ssl_certificates = var.ssl_certificate
 }
 
@@ -41,10 +41,11 @@ resource "google_compute_region_target_http_proxy" "default" {
   project = var.project
   region  = var.region
   name    = "${var.name}-internal-http"
-  url_map = google_compute_region_url_map.default.self_link
+  url_map = var.create_url_map ? google_compute_region_url_map.default[0].self_link : var.url_map
 }
 
 resource "google_compute_region_url_map" "default" {
+  count           = var.create_url_map
   project         = var.project
   region          = var.region
   name            = "${var.name}-internal-lb"

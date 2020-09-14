@@ -159,3 +159,15 @@ variable "ssl_certificate" {
   type        = list(string)
   default     = []
 }
+
+variable "create_url_map" {
+  description = "Create regional url map?"
+  default     = true
+  type        = bool
+}
+
+variable "url_map" {
+  description = "Regional url map self link"
+  default     = null
+  type        = string
+}

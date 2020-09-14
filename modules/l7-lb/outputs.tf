@@ -23,3 +23,7 @@ output "forwarding_rule" {
   description = "The forwarding rule self_link."
   value       = google_compute_forwarding_rule.default.self_link
 }
+
+output "backend_service_link" {
+  value = google_compute_region_backend_service.default.*.self_link
+}
