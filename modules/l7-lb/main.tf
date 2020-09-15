@@ -78,6 +78,7 @@ resource "google_compute_region_backend_service" "default" {
   timeout_sec      = 10
   session_affinity = var.session_affinity
   port_name        = var.port_name
+  load_balancing_scheme = "INTERNAL_MANAGED"
   dynamic "backend" {
     for_each = toset(each.value["backend"])
     content {
