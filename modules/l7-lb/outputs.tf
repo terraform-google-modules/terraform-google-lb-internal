@@ -16,12 +16,12 @@
 
 output "ip_address" {
   description = "The internal IP assigned to the regional forwarding rule."
-  value       = google_compute_forwarding_rule.default.ip_address
+  value       = google_compute_forwarding_rule.http.ip_address
 }
 
 output "forwarding_rule" {
   description = "The forwarding rule self_link."
-  value       = google_compute_forwarding_rule.default.self_link
+  value       = google_compute_forwarding_rule.http.self_link
 }
 
 output "backend_services" {

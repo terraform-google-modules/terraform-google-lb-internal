@@ -27,6 +27,14 @@ data "google_compute_subnetwork" "network" {
   region  = var.region
 }
 
+resource "google_compute_region_target_http_proxy" "default" {
+  count   = var.enable_http_proxy ? 1 : 0
+  project = var.project
+  region  = var.region
+  name    = "${var.name}-internal-http"
+  url_map = var.create_url_map ? google_compute_region_url_map.default[0].self_link : var.url_map
+}
+
 resource "google_compute_region_target_https_proxy" "default" {
   count            = length(var.ssl_certificate) > 0 ? 1 : 0
   project          = var.project
@@ -34,14 +42,6 @@ resource "google_compute_region_target_https_proxy" "default" {
   name             = "${var.name}-internal-https"
   url_map          = var.create_url_map ? google_compute_region_url_map.default[0].self_link : var.url_map
   ssl_certificates = var.ssl_certificate
-}
-
-resource "google_compute_region_target_http_proxy" "default" {
-  count   = length(var.ssl_certificate) > 0 ? 0 : 1
-  project = var.project
-  region  = var.region
-  name    = "${var.name}-internal-http"
-  url_map = var.create_url_map ? google_compute_region_url_map.default[0].self_link : var.url_map
 }
 
 resource "google_compute_region_url_map" "default" {
@@ -52,20 +52,33 @@ resource "google_compute_region_url_map" "default" {
   default_service = google_compute_region_backend_service.default[keys(var.backends)[0]].self_link
 }
 
-resource "google_compute_forwarding_rule" "default" {
+resource "google_compute_forwarding_rule" "http" {
   project               = var.project
-  name                  = var.name
+  name                  = "${var.name}-http"
   region                = var.region
   network               = data.google_compute_network.network.self_link
   subnetwork            = data.google_compute_subnetwork.network.self_link
-  target                = length(var.ssl_certificate) == 0 ? google_compute_region_target_http_proxy.default[0].id : google_compute_region_target_https_proxy.default[0].id
+  target                = google_compute_region_target_http_proxy.default[0].id
   allow_global_access   = var.global_access
   load_balancing_scheme = "INTERNAL_MANAGED"
   ip_address            = var.ip_address
   ip_protocol           = var.ip_protocol
-  port_range            = var.port_range
-  ports                 = var.ports
-  all_ports             = var.all_ports
+  port_range            = 80
+  service_label         = var.service_label
+}
+
+resource "google_compute_forwarding_rule" "https" {
+  project               = var.project
+  name                  = "${var.name}-https"
+  region                = var.region
+  network               = data.google_compute_network.network.self_link
+  subnetwork            = data.google_compute_subnetwork.network.self_link
+  target                = google_compute_region_target_https_proxy.default[0].id
+  allow_global_access   = var.global_access
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  ip_address            = var.ip_address
+  ip_protocol           = var.ip_protocol
+  port_range            = 443
   service_label         = var.service_label
 }
 
