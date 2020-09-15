@@ -85,6 +85,7 @@ resource "google_compute_region_backend_service" "default" {
       group           = lookup(backend.value, "group", null)
       description     = lookup(backend.value, "description", null)
       balancing_mode  = lookup(backend.value, "balancing_mode", null)
+      capacity_scaler = lookup(backend.value, "capacity_scaler", null)
     }
   }
   health_checks = [var.health_check["type"] == "tcp" ? google_compute_region_health_check.tcp[0].self_link : google_compute_region_health_check.http[0].self_link]

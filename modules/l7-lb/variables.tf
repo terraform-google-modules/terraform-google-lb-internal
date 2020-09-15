@@ -57,6 +57,7 @@ variable "backends" {
       group = string,
       description = string,
       balancing_mode = string,
+      capacity_scaler = number
     }))
   }))
 }
