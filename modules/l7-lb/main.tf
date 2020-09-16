@@ -16,9 +16,6 @@
 
 # The forwarding rule resource needs the self_link but the firewall rules only need the name.
 # Using a data source here to access both self_link and name by looking up the network name.
-locals {
-  create_http_forward     = var.enable_http_proxy || var.https_redirect
-}
 
 data "google_compute_network" "network" {
   name    = var.network
@@ -32,7 +29,7 @@ data "google_compute_subnetwork" "network" {
 }
 
 resource "google_compute_region_target_http_proxy" "default" {
-  count   = local.create_http_forward ? 1 : 0
+  count   = length(var.ssl_certificate) > 0 ? 0 : 1
   project = var.project
   region  = var.region
   name    = "${var.name}-internal-http"
@@ -57,7 +54,7 @@ resource "google_compute_region_url_map" "default" {
 }
 
 resource "google_compute_forwarding_rule" "http" {
-  count                 = local.create_http_forward ? 1 : 0
+  count                 = length(var.ssl_certificate) > 0 ? 0 : 1
   project               = var.project
   name                  = "${var.name}-http"
   region                = var.region
@@ -86,17 +83,6 @@ resource "google_compute_forwarding_rule" "https" {
   ip_protocol           = var.ip_protocol
   port_range            = 443
   service_label         = var.service_label
-}
-
-resource "google_compute_url_map" "https_redirect" {
-  project = var.project
-  count   = var.https_redirect ? 1 : 0
-  name    = "${var.name}-https-redirect"
-  default_url_redirect {
-    https_redirect         = true
-    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
-    strip_query            = false
-  }
 }
 
 resource "google_compute_region_backend_service" "default" {

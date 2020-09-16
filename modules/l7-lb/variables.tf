@@ -175,15 +175,3 @@ variable "url_map" {
   default     = null
   type        = string
 }
-
-variable "enable_http_proxy" {
-  description = "Create target http proxy?"
-  default     = true
-  type        = bool
-}
-
-variable "https_redirect" {
-  description = "Create url map resource with http to https redirect"
-  default     = false
-  type        = bool
-}
