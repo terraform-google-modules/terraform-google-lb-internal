@@ -44,12 +44,13 @@ resource "google_compute_forwarding_rule" "default" {
 }
 
 resource "google_compute_region_backend_service" "default" {
-  project          = var.project
-  name             = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
-  region           = var.region
-  protocol         = var.ip_protocol
-  timeout_sec      = 10
-  session_affinity = var.session_affinity
+  project                         = var.project
+  name                            = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
+  region                          = var.region
+  protocol                        = var.ip_protocol
+  timeout_sec                     = 10
+  connection_draining_timeout_sec = var.connection_draining_timeout_sec
+  session_affinity                = var.session_affinity
   dynamic "backend" {
     for_each = var.backends
     content {
