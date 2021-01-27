@@ -132,3 +132,8 @@ variable "service_label" {
   type        = string
 }
 
+variable "connection_draining_timeout_sec" {
+  description = "Time for which instance will be drained"
+  default     = null
+  type        = number
+}
