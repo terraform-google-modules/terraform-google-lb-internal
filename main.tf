@@ -51,6 +51,13 @@ resource "google_compute_region_backend_service" "default" {
   timeout_sec                     = 10
   connection_draining_timeout_sec = var.connection_draining_timeout_sec
   session_affinity                = var.session_affinity
+  
+  failover_policy {
+    failover_ratio = var.failover_policy["failover_ratio"]
+    drop_traffic_if_unhealty = var.failover_policy["drop_traffic_if_unhealty"]
+    disable_connection_drain_on_failover = var.failover_policy["disable_connection_drain_on_failover"]
+  }
+  
   dynamic "backend" {
     for_each = var.backends
     content {
