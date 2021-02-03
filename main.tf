@@ -53,16 +53,17 @@ resource "google_compute_region_backend_service" "default" {
   session_affinity                = var.session_affinity
   
   failover_policy {
-    failover_ratio = var.failover_policy["failover_ratio"]
-    drop_traffic_if_unhealty = var.failover_policy["drop_traffic_if_unhealty"]
-    disable_connection_drain_on_failover = var.failover_policy["disable_connection_drain_on_failover"]
+    failover_ratio = var.failover_ratio
+    drop_traffic_if_unhealty = var.drop_traffic_if_unhealty
+    disable_connection_drain_on_failover = var.disable_connection_drain_on_failover
   }
-  
+
   dynamic "backend" {
     for_each = var.backends
     content {
       group       = lookup(backend.value, "group", null)
       description = lookup(backend.value, "description", null)
+      failover    = lookup(backend.value, "failover", null)
     }
   }
   health_checks = [var.health_check["type"] == "tcp" ? google_compute_health_check.tcp[0].self_link : google_compute_health_check.http[0].self_link]
