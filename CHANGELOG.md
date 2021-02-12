@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.2.0...v2.3.0) (2021-01-27)
+
+
+### Features
+
+* Adding `connection_draining_timeout_sec` variable to control backend service ([#42](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/42)) ([a6198e3](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/a6198e31e7155530f762d4078394a8e9d8b76b28))
+
 ## [2.2.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.1.0...v2.2.0) (2020-05-27)
 
 
