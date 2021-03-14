@@ -15,7 +15,7 @@
  */
 
 provider google {
-  version = "~> 3.14.0"
+  version = "~> 3.53.0"
 }
 
 provider "random" {
