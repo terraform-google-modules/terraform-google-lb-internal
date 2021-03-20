@@ -78,6 +78,10 @@ resource "google_compute_health_check" "tcp" {
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
   }
+
+  log_config {
+    enable = var.health_check["enable_log"]
+  }
 }
 
 resource "google_compute_health_check" "http" {
@@ -97,6 +101,10 @@ resource "google_compute_health_check" "http" {
     response     = var.health_check["response"]
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
+  }
+
+  log_config {
+    enable = var.health_check["enable_log"]
   }
 }
 
