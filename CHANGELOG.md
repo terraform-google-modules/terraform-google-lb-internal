@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.3.0...v2.4.0) (2021-02-12)
+
+
+### Features
+
+* Add `var.create_backend_firewall` to conditionally disable backend firewalls ([#46](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/46)) ([43b75c8](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/43b75c83c0f788a86ed3bcc1f2680b3f23d6635f))
+
 ## [2.3.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.2.0...v2.3.0) (2021-01-27)
 
 
