@@ -15,12 +15,12 @@
  */
 
 provider "google" {
-  version = "~> 3.14.0"
+  version = "~> 3.62.0"
 }
 
 module "gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
-  version      = "~> 2.0"
+  version      = "~> 2.3"
   region       = var.region
   network      = var.network
   project      = var.project
