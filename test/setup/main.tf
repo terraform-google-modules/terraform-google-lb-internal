@@ -16,10 +16,10 @@
 
 module "project-ci-lb-internal" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 4.0"
+  version = "~> 10.2"
 
   name              = "ci-int-lb-internal"
-  random_project_id = "true"
+  random_project_id = true
   org_id            = var.org_id
   folder_id         = var.folder_id
   billing_account   = var.billing_account
@@ -31,4 +31,3 @@ module "project-ci-lb-internal" {
     "compute.googleapis.com"
   ]
 }
-
