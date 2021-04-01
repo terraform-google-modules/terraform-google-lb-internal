@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-provider google {
-  version = "~> 3.53.0"
+provider "google" {
+  version = "~> 3.62.0"
 }
 
 provider "random" {
