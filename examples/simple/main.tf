@@ -18,6 +18,10 @@ provider "google" {
   version = "~> 3.62.0"
 }
 
+provider "google-beta" {
+  version = "~> 3.62.0"
+}
+
 module "gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
   version      = "~> 2.3"
