@@ -86,8 +86,6 @@ resource "google_compute_health_check" "tcp" {
       enable = true
     }
   }
-    enable = var.health_check["enable_log"]
-  }
 }
 
 resource "google_compute_health_check" "http" {
@@ -110,8 +108,11 @@ resource "google_compute_health_check" "http" {
     proxy_header = var.health_check["proxy_header"]
   }
 
-  log_config {
-    enable = var.health_check["enable_log"]
+  dynamic "log_config" {
+    for_each = var.health_check["enable_log"] ? [true] : []
+    content {
+      enable = true
+    }
   }
 }
 
