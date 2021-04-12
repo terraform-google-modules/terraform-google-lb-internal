@@ -80,7 +80,12 @@ resource "google_compute_health_check" "tcp" {
     proxy_header = var.health_check["proxy_header"]
   }
 
-  log_config {
+  dynamic "log_config" {
+    for_each = var.health_check["enable_log"] ? [true] : []
+    content {
+      enable = true
+    }
+  }
     enable = var.health_check["enable_log"]
   }
 }
@@ -142,4 +147,3 @@ resource "google_compute_firewall" "default-hc" {
   target_tags             = var.target_tags
   target_service_accounts = var.target_service_accounts
 }
-
