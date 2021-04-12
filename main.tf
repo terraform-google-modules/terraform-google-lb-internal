@@ -62,9 +62,10 @@ resource "google_compute_region_backend_service" "default" {
 }
 
 resource "google_compute_health_check" "tcp" {
-  count   = var.health_check["type"] == "tcp" ? 1 : 0
-  project = var.project
-  name    = "${var.name}-hc-tcp"
+  provider = google-beta
+  count    = var.health_check["type"] == "tcp" ? 1 : 0
+  project  = var.project
+  name     = "${var.name}-hc-tcp"
 
   timeout_sec         = var.health_check["timeout_sec"]
   check_interval_sec  = var.health_check["check_interval_sec"]
@@ -78,12 +79,20 @@ resource "google_compute_health_check" "tcp" {
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
   }
+
+  dynamic "log_config" {
+    for_each = var.health_check["enable_log"] ? [true] : []
+    content {
+      enable = true
+    }
+  }
 }
 
 resource "google_compute_health_check" "http" {
-  count   = var.health_check["type"] == "http" ? 1 : 0
-  project = var.project
-  name    = "${var.name}-hc-http"
+  provider = google-beta
+  count    = var.health_check["type"] == "http" ? 1 : 0
+  project  = var.project
+  name     = "${var.name}-hc-http"
 
   timeout_sec         = var.health_check["timeout_sec"]
   check_interval_sec  = var.health_check["check_interval_sec"]
@@ -97,6 +106,13 @@ resource "google_compute_health_check" "http" {
     response     = var.health_check["response"]
     port_name    = var.health_check["port_name"]
     proxy_header = var.health_check["proxy_header"]
+  }
+
+  dynamic "log_config" {
+    for_each = var.health_check["enable_log"] ? [true] : []
+    content {
+      enable = true
+    }
   }
 }
 
@@ -132,4 +148,3 @@ resource "google_compute_firewall" "default-hc" {
   target_tags             = var.target_tags
   target_service_accounts = var.target_service_accounts
 }
-

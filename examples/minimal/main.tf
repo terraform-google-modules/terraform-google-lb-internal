@@ -46,6 +46,7 @@ locals {
     request             = ""
     request_path        = "/"
     host                = "1.2.3.4"
+    enable_log          = false
   }
 }
 

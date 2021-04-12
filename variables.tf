@@ -85,6 +85,7 @@ variable "health_check" {
     request             = string
     request_path        = string
     host                = string
+    enable_log          = bool
   })
 }
 
