@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.4.0...v3.0.0) (2021-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* add Terraform 0.13 constraint and module attribution (#48)
+
+### Features
+
+* Add option to enable health check logging ([#49](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/49)) ([547c932](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/547c9320bdf1d9efe5157dd73a09810e4fa272b4))
+* add Terraform 0.13 constraint and module attribution ([#48](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/48)) ([aca0c93](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/aca0c939f4c9eedf555e8cace8d4fd13e4ec871f))
+
 ## [2.4.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v2.3.0...v2.4.0) (2021-02-12)
 
 
