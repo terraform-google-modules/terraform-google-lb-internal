@@ -46,7 +46,7 @@ resource "google_compute_region_backend_service" "default" {
   name             = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
   region           = var.region
   protocol         = var.ip_protocol
-  timeout_sec      = var.health_check["timeout_sec"]
+  timeout_sec      = var.health_check["timeout_sec"] == null ? 10 : var.health_check["timeout_sec"]
   session_affinity = var.session_affinity
   dynamic "backend" {
     for_each = var.backends
@@ -128,4 +128,3 @@ resource "google_compute_firewall" "default-hc" {
   target_tags             = var.target_tags
   target_service_accounts = var.target_service_accounts
 }
-
