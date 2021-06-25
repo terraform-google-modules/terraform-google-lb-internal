@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v3.1.0...v3.2.0) (2021-06-25)
+
+
+### Features
+
+* Update google_compute_region_backend_service timeout to use same timeout as var.health_check ([#55](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/55)) ([e56d959](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/e56d9595a546a7a42ae5a83fc0d9f2c3cdae274b))
+
 ## [3.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v3.0.0...v3.1.0) (2021-05-06)
 
 
