@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v3.1.0...v4.0.0) (2021-07-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Backend service now inherits the same timeout used for health checks, instead of the former hardcoded value of 10 seconds.
+
+### Features
+
+* Update google_compute_region_backend_service timeout to use same timeout as var.health_check ([#55](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/55)) ([e56d959](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/e56d9595a546a7a42ae5a83fc0d9f2c3cdae274b))
+
+
+### Bug Fixes
+
+* Correct timeout value in tests to match [#55](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/55) ([#57](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/57)) ([cdd6e72](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/cdd6e72ef650a8c096256d64d6410fa19df3f90a))
+
 ## [3.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v3.0.0...v3.1.0) (2021-05-06)
 
 
