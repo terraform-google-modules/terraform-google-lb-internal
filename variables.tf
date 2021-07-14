@@ -140,7 +140,13 @@ variable "connection_draining_timeout_sec" {
 }
 
 variable "create_backend_firewall" {
-  description = "Controls if firewall rules for the backends will be created or not. Health-check firewall rules are always created."
+  description = "Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately."
+  default     = true
+  type        = bool
+}
+
+variable "create_healtcheck_firewall" {
+  description = "Controls if firewall rules for the health check will be created or not. If this rule is not present firewall healthcheck will fail."
   default     = true
   type        = bool
 }

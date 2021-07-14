@@ -135,6 +135,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
 }
 
 resource "google_compute_firewall" "default-hc" {
+  count   = var.create_healtcheck_firewall ? 1 : 0
   project = var.network_project == "" ? var.project : var.network_project
   name    = "${var.name}-hc"
   network = data.google_compute_network.network.name
