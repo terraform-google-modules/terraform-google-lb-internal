@@ -145,7 +145,7 @@ variable "create_backend_firewall" {
   type        = bool
 }
 
-variable "create_healtcheck_firewall" {
+variable "create_health_check_firewall" {
   description = "Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail."
   default     = true
   type        = bool
