@@ -66,7 +66,7 @@ resource "google_compute_subnetwork" "test" {
 # [START cloudloadbalancing_int_tcp_udp_gce]
 module "test_ilb" {
   source       = "GoogleCloudPlatform/lb-internal/google"
-  version      = "2.3.0"
+  version      = "~> 4.0"
   project      = var.project_id
   network      = google_compute_network.test.name
   subnetwork   = google_compute_subnetwork.test.name
