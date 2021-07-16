@@ -64,7 +64,7 @@ resource "google_compute_subnetwork" "test" {
   ip_cidr_range = "10.2.0.0/16"
 }
 
-# [START cloudloadbalancing_int_tcp_udp_gce]
+# [START cloudloadbalancing_int_tcp_udp_minimal]
 module "test_ilb" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 4.0"
@@ -79,4 +79,4 @@ module "test_ilb" {
   backends     = []
   health_check = local.health_check
 }
-# [END cloudloadbalancing_int_tcp_udp_gce]
+# [END cloudloadbalancing_int_tcp_udp_minimal]
