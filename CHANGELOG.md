@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.0.0...v4.1.0) (2021-07-16)
+
+
+### Features
+
+* Enable users to control if firewall rules for health check are created ([#59](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/59)) ([9206a3c](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/9206a3cf7875050de5f1e4cb59ce67631dcd42aa))
+
 ## [4.0.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v3.1.0...v4.0.0) (2021-07-09)
 
 
