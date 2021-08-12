@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Features
 
-* Remove timeout_sec from the google_compute_region_backend_service because it is ignored by GCP ([#53](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53)) 
+* Remove timeout_sec from the google_compute_region_backend_service because it is ignored by GCP ([#53](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53))
 
 ## [4.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.0.0...v4.1.0) (2021-07-16)
 
