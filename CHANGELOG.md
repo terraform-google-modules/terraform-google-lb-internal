@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Features
+
+* Remove timeout_sec from the google_compute_region_backend_service because it is ignored by GCP ([#53](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53))
+
 ## [4.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.0.0...v4.1.0) (2021-07-16)
 
 
