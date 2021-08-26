@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.1.0...v4.2.0) (2021-08-26)
+
+
+### Features
+
+* enable failover designation for a backend ([#73](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/73)) ([73e89a8](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/73e89a8b795207d0c172e205d591ff6a7595743a))
+
+
+### Bug Fixes
+
+* Remove timeout_sec from google_compute_region_backend_service ([#70](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/70)) ([e0ac13b](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/e0ac13b5301b11a3e790de9148993d864ec2a816))
+
 ## [4.1.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.0.0...v4.1.0) (2021-07-16)
 
 

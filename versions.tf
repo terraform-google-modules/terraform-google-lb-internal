@@ -25,7 +25,7 @@ terraform {
   }
 
   provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-lb-internal/v4.1.0"
+    module_name = "blueprints/terraform/terraform-google-lb-internal/v4.2.0"
   }
 
 }
