@@ -47,10 +47,12 @@ module "gce-ilb" {
     {
       group       = module.mig2.instance_group
       description = ""
+      failover    = false
     },
     {
       group       = module.mig3.instance_group
       description = ""
+      failover    = false
     },
   ]
 }

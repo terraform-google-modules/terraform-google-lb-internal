@@ -51,7 +51,7 @@ variable "name" {
 
 variable "backends" {
   description = "List of backends, should be a map of key-value pairs for each backend, must have the 'group' key."
-  type        = list(object({ group = string, description = string }))
+  type        = list(any)
 }
 
 variable "session_affinity" {
