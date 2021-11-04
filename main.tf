@@ -45,7 +45,7 @@ resource "google_compute_forwarding_rule" "default" {
 
 resource "google_compute_region_backend_service" "default" {
   project  = var.project
-  name     = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : ("http" ? "${var.name}-with-http-hc" : "${var.name}-with-https-hc")
+  name     = (var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : (var.health_check["type"] == "http" ? "${var.name}-with-http-hc" : "${var.name}-with-https-hc"))
   region   = var.region
   protocol = var.ip_protocol
   # Do not try to add timeout_sec, as it is has no impact. See https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53#issuecomment-893427675
@@ -59,7 +59,7 @@ resource "google_compute_region_backend_service" "default" {
       failover    = lookup(backend.value, "failover", null)
     }
   }
-  health_checks = [var.health_check["type"] == "tcp" ? google_compute_health_check.tcp[0].self_link : ("http" ? google_compute_health_check.http[0].self_link : google_compute_health_check.https[0].self_link)]
+  health_checks = [(var.health_check["type"] == "tcp" ? google_compute_health_check.tcp[0].self_link : (var.health_check["type"] == "http" ? google_compute_health_check.http[0].self_link : google_compute_health_check.https[0].self_link))]
 }
 
 resource "google_compute_health_check" "tcp" {
