@@ -59,7 +59,8 @@ resource "google_compute_region_backend_service" "default" {
       failover    = lookup(backend.value, "failover", null)
     }
   }
-  health_checks = [lookup(var.health_check_type, var.health_check["type"], "tcp")]
+  #health_checks = [lookup(var.health_check_type, var.health_check["type"], "tcp")]
+  health_checks = [(var.health_check["type"] == "tcp" ? google_compute_health_check.tcp[0].self_link : (var.health_check["type"] == "http" ? google_compute_health_check.http[0].self_link : google_compute_health_check.https[0].self_link))]
 }
 
 resource "google_compute_firewall" "default-ilb-fw" {
