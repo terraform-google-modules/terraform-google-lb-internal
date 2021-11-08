@@ -154,19 +154,19 @@ variable "create_health_check_firewall" {
 variable "health_check_type" {
   default = {
     "tcp" = {
-      name = "google_compute_health_check.tcp[0].self_link"
+      name = google_compute_health_check.tcp[0].self_link
     },
     "ssl" = {
-      name = "google_compute_health_check.ssl[0].self_link"
+      name = google_compute_health_check.ssl[0].self_link
     },
     "http" = {
-      name = "google_compute_health_check.http[0].self_link"
+      name = google_compute_health_check.http[0].self_link
     },
     "https" = {
-      name = "google_compute_health_check.https[0].self_link"
+      name = google_compute_health_check.https[0].self_link
     },
     "http2" = {
-      name = "google_compute_health_check.http2[0].self_link"
+      name = google_compute_health_check.http2[0].self_link
     }
   }
 }
