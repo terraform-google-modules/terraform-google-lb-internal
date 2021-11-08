@@ -152,7 +152,6 @@ variable "create_health_check_firewall" {
 }
 
 variable "health_check_type" {
-  type = map(any)
   default = {
     "tcp" = {
       name = "google_compute_health_check.tcp[0].self_link"
