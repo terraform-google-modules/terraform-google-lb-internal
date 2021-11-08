@@ -45,7 +45,7 @@ resource "google_compute_forwarding_rule" "default" {
 
 resource "google_compute_region_backend_service" "default" {
   project  = var.project
-  name     = var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc"
+  name     = var.bs_name == "" ? (var.health_check["type"] == "tcp" ? "${var.name}-with-tcp-hc" : "${var.name}-with-http-hc") : var.bs_name
   region   = var.region
   protocol = var.ip_protocol
   # Do not try to add timeout_sec, as it is has no impact. See https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53#issuecomment-893427675
@@ -64,7 +64,7 @@ resource "google_compute_region_backend_service" "default" {
 
 resource "google_compute_health_check" "tcp" {
   provider = google-beta
-  count    = var.health_check["type"] == "tcp" ? 1 : 0
+  count    = var.hc_name == "" ? (var.health_check["type"] == "tcp" ? 1 : 0) : var.hc_name
   project  = var.project
   name     = "${var.name}-hc-tcp"
 
@@ -91,7 +91,7 @@ resource "google_compute_health_check" "tcp" {
 
 resource "google_compute_health_check" "http" {
   provider = google-beta
-  count    = var.health_check["type"] == "http" ? 1 : 0
+  count    = var.hc_name == "" ? (var.health_check["type"] == "http" ? 1 : 0) : var.hc_name
   project  = var.project
   name     = "${var.name}-hc-http"
 
@@ -120,7 +120,7 @@ resource "google_compute_health_check" "http" {
 resource "google_compute_firewall" "default-ilb-fw" {
   count   = var.create_backend_firewall ? 1 : 0
   project = var.network_project == "" ? var.project : var.network_project
-  name    = "${var.name}-ilb-fw"
+  name    = var.fw_name == "" ? ("${var.name}-ilb-fw") : var.fw_name
   network = data.google_compute_network.network.name
 
   allow {
