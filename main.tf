@@ -16,23 +16,13 @@
 
 # The forwarding rule resource needs the self_link but the firewall rules only need the name.
 # Using a data source here to access both self_link and name by looking up the network name.
-data "google_compute_network" "network" {
-  name    = var.network
-  project = var.network_project == "" ? var.project : var.network_project
-}
-
-data "google_compute_subnetwork" "network" {
-  name    = var.subnetwork
-  project = var.network_project == "" ? var.project : var.network_project
-  region  = var.region
-}
 
 resource "google_compute_forwarding_rule" "default" {
   project               = var.project
   name                  = var.name
   region                = var.region
-  network               = data.google_compute_network.network.self_link
-  subnetwork            = data.google_compute_subnetwork.network.self_link
+  network               = var.network
+  subnetwork            = var.subnetwork
   allow_global_access   = var.global_access
   load_balancing_scheme = "INTERNAL"
   backend_service       = google_compute_region_backend_service.default.self_link
@@ -121,7 +111,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
   count   = var.create_backend_firewall ? 1 : 0
   project = var.network_project == "" ? var.project : var.network_project
   name    = "${var.name}-ilb-fw"
-  network = data.google_compute_network.network.name
+  network = local.network_name
 
   allow {
     protocol = lower(var.ip_protocol)
@@ -139,7 +129,7 @@ resource "google_compute_firewall" "default-hc" {
   count   = var.create_health_check_firewall ? 1 : 0
   project = var.network_project == "" ? var.project : var.network_project
   name    = "${var.name}-hc"
-  network = data.google_compute_network.network.name
+  network = local.network_name
 
   allow {
     protocol = "tcp"
