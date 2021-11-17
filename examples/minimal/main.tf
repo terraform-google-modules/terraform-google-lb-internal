@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 3.62.0"
-}
-
-provider "random" {
-  version = "~> 2.0"
-}
-
 resource "random_string" "suffix" {
   length  = 8
   upper   = false
