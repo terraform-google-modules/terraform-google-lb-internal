@@ -150,3 +150,21 @@ variable "create_health_check_firewall" {
   default     = true
   type        = bool
 }
+
+variable "bs_name" {
+  type        = string
+  description = "Backend serevice name. When variable is empty, name will be derived from health_check[\"type\"]"
+  default     = ""
+}
+
+variable "hc_name" {
+  type        = string
+  description = "Health check name. When variable is empty, name will be derived from health_check[\"type\"]"
+  default     = ""
+}
+
+variable "fw_name" {
+  type        = string
+  description = "Firewall rule name. When variable is empty, name will be derived from var.name"
+  default     = ""
+}
