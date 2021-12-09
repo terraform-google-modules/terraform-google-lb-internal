@@ -15,7 +15,7 @@
  */
 
 module "example" {
-  source     = "../../../"
+  source       = "../../../"
   project      = var.project_id
   network      = google_compute_network.test.name
   subnetwork   = google_compute_subnetwork.test.name
