@@ -74,7 +74,7 @@ control 'minimal' do
     end
 
     it 'has a timeout length of 1 second' do
-      expect(backend_services[0]['timeoutSec']).to eq(1)
+      expect(backend_services[0]['timeoutSec']).to eq(30)
     end
   end
 end
