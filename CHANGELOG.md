@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.3.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.2.0...v4.3.0) (2021-12-10)
+
+
+### Features
+
+* Upgrade to v4 of the Google Cloud Terraform Provider ([#81](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/issues/81)) ([704e5fd](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/commit/704e5fd5bc4f3ef0461235373e18b368c9cd4177))
+
 ## [4.2.0](https://www.github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.1.0...v4.2.0) (2021-08-26)
 
 
