@@ -133,6 +133,13 @@ resource "google_compute_firewall" "default-ilb-fw" {
   source_service_accounts = var.source_service_accounts
   target_tags             = var.target_tags
   target_service_accounts = var.target_service_accounts
+
+  dynamic "log_config" {
+    for_each = var.enable_firewall_logging ? [true] : []
+    content {
+      enable = true
+    }
+  }
 }
 
 resource "google_compute_firewall" "default-hc" {
@@ -149,4 +156,11 @@ resource "google_compute_firewall" "default-hc" {
   source_ranges           = ["130.211.0.0/22", "35.191.0.0/16"]
   target_tags             = var.target_tags
   target_service_accounts = var.target_service_accounts
+
+  dynamic "log_config" {
+    for_each = var.enable_firewall_logging ? [true] : []
+    content {
+      enable = true
+    }
+  }
 }
