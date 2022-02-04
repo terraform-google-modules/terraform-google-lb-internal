@@ -137,7 +137,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
   dynamic "log_config" {
     for_each = var.enable_firewall_logging ? [true] : []
     content {
-      enable = true
+      metadata = "INCLUDE_ALL_METADATA"
     }
   }
 }
@@ -160,7 +160,7 @@ resource "google_compute_firewall" "default-hc" {
   dynamic "log_config" {
     for_each = var.enable_firewall_logging ? [true] : []
     content {
-      enable = true
+      metadata = "INCLUDE_ALL_METADATA"
     }
   }
 }
