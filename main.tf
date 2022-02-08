@@ -135,7 +135,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
   target_service_accounts = var.target_service_accounts
 
   dynamic "log_config" {
-    for_each = var.enable_firewall_logging ? [true] : []
+    for_each = var.firewall_enable_logging ? [true] : []
     content {
       metadata = "INCLUDE_ALL_METADATA"
     }
@@ -158,7 +158,7 @@ resource "google_compute_firewall" "default-hc" {
   target_service_accounts = var.target_service_accounts
 
   dynamic "log_config" {
-    for_each = var.enable_firewall_logging ? [true] : []
+    for_each = var.firewall_enable_logging ? [true] : []
     content {
       metadata = "INCLUDE_ALL_METADATA"
     }
