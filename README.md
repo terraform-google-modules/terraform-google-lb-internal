@@ -41,9 +41,9 @@ module "gce-ilb" {
 
 ## Resources created
 
-- [`google_compute_forwarding_rule.default`](https://www.terraform.io/docs/providers/google/r/compute_forwarding_rule.html): The internal regional forwarding rule.
-- [`google_compute_region_backend_service.default`](https://www.terraform.io/docs/providers/google/r/compute_region_backend_service.html): The backend service registered to the given `instance_group`.
-- [`google_compute_health_check.tcp`](https://www.terraform.io/docs/providers/google/r/compute_health_check.html): The TCP health check for the `instance_group` targets.
-- [`google_compute_health_check.http`](https://www.terraform.io/docs/providers/google/r/compute_health_check.html): The HTTP health check for the `instance_group` targets.
-- [`google_compute_firewall.default-ilb-fw`](https://www.terraform.io/docs/providers/google/r/compute_firewall.html): Firewall rule that allows traffic from the `source_tags` resources to `target_tags` on the `service_port`.
-- [`google_compute_firewall.default-hc`](https://www.terraform.io/docs/providers/google/r/compute_firewall.html): Firewall rule that allows traffic for health checks to the `target_tags` resources.
+- [`google_compute_forwarding_rule.default`](https://www.terraform.io/docs/providers/google/r/compute_forwarding_rule): The internal regional forwarding rule.
+- [`google_compute_region_backend_service.default`](https://www.terraform.io/docs/providers/google/r/compute_region_backend_service): The backend service registered to the given `instance_group`.
+- [`google_compute_health_check.tcp`](https://www.terraform.io/docs/providers/google/r/compute_health_check): The TCP health check for the `instance_group` targets.
+- [`google_compute_health_check.http`](https://www.terraform.io/docs/providers/google/r/compute_health_check): The HTTP health check for the `instance_group` targets.
+- [`google_compute_firewall.default-ilb-fw`](https://www.terraform.io/docs/providers/google/r/compute_firewall): Firewall rule that allows traffic from the `source_tags` resources to `target_tags` on the `service_port`.
+- [`google_compute_firewall.default-hc`](https://www.terraform.io/docs/providers/google/r/compute_firewall): Firewall rule that allows traffic for health checks to the `target_tags` resources.
