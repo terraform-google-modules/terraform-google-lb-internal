@@ -44,8 +44,8 @@ resource "google_compute_forwarding_rule" "default" {
 }
 
 resource "google_compute_region_backend_service" "default" {
-  project  = var.project
-  name     = {
+  project = var.project
+  name = {
     "tcp"   = "${var.name}-with-tcp-hc",
     "http"  = "${var.name}-with-http-hc",
     "https" = "${var.name}-with-https-hc",
@@ -120,7 +120,7 @@ resource "google_compute_health_check" "http" {
     }
   }
 }
-   
+
 resource "google_compute_health_check" "https" {
   provider = google-beta
   count    = var.health_check["type"] == "https" ? 1 : 0
