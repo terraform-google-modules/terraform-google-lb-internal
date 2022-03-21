@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [4.4.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.4.0...v4.4.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* Actually use an https_health_check ([#88](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/88)) ([68413a9](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/68413a94822fc777ed1b7b4efa1615b380de102c))
+
 ## [4.4.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.3.0...v4.4.0) (2022-03-03)
 
 
