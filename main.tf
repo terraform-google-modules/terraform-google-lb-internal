@@ -132,7 +132,7 @@ resource "google_compute_health_check" "https" {
   healthy_threshold   = var.health_check["healthy_threshold"]
   unhealthy_threshold = var.health_check["unhealthy_threshold"]
 
-  http_health_check {
+  https_health_check {
     port         = var.health_check["port"]
     request_path = var.health_check["request_path"]
     host         = var.health_check["host"]
