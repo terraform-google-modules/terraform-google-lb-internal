@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.4.1...v4.5.0) (2022-04-05)
+
+
+### Features
+
+* Adding network attribute to ILB "backend_service" to access multiNIC ([#91](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/91)) ([9d648c7](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/9d648c74fe3ec5b577f7efa427e32e15ef5bb7fd))
+
 ### [4.4.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.4.0...v4.4.1) (2022-03-21)
 
 
