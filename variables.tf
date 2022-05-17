@@ -150,3 +150,9 @@ variable "create_health_check_firewall" {
   default     = true
   type        = bool
 }
+
+variable "firewall_enable_logging" {
+  description = "Controls if firewall rules that are created are to have logging configured. This will be ignored for firewall rules that are not created."
+  default     = false
+  type        = bool
+}
