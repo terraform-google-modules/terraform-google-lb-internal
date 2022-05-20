@@ -156,3 +156,9 @@ variable "firewall_enable_logging" {
   default     = false
   type        = bool
 }
+
+variable "labels" {
+  description = "The labels to attach to resources created by this module."
+  default     = {}
+  type        = map(string)
+}

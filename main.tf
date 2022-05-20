@@ -28,6 +28,7 @@ data "google_compute_subnetwork" "network" {
 }
 
 resource "google_compute_forwarding_rule" "default" {
+  provider              = google-beta
   project               = var.project
   name                  = var.name
   region                = var.region
@@ -41,6 +42,7 @@ resource "google_compute_forwarding_rule" "default" {
   ports                 = var.ports
   all_ports             = var.all_ports
   service_label         = var.service_label
+  labels                = var.labels
 }
 
 resource "google_compute_region_backend_service" "default" {
