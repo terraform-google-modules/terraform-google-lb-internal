@@ -65,6 +65,13 @@ resource "google_compute_region_backend_service" "default" {
     }
   }
   health_checks = concat(google_compute_health_check.tcp.*.self_link, google_compute_health_check.http.*.self_link, google_compute_health_check.https.*.self_link)
+
+  lifecycle {
+    ignore_changes = [
+      # We set network configuration only once, because network field cannot be modified.
+      network,
+    ]
+  }
 }
 
 resource "google_compute_health_check" "tcp" {
