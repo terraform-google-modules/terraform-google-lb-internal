@@ -16,7 +16,7 @@
 
 module "gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
-  version      = "~> 2.3"
+  version      = "~> 3.1"
   region       = var.region
   network      = var.network
   project      = var.project
