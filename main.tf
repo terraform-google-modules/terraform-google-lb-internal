@@ -41,6 +41,7 @@ resource "google_compute_forwarding_rule" "default" {
   ports                 = var.ports
   all_ports             = var.all_ports
   service_label         = var.service_label
+  labels                = var.labels
 }
 
 resource "google_compute_region_backend_service" "default" {

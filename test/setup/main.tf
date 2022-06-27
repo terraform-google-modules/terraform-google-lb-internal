@@ -16,7 +16,7 @@
 
 module "project-ci-lb-internal" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.2"
+  version = "~> 13.0"
 
   name              = "ci-int-lb-internal"
   random_project_id = true
