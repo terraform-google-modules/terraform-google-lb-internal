@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ⚠ BREAKING CHANGES
 
-* Adds support for labels (#96)
+* Increased Google Provider minimum version to 4.26 (#96)
 
 ### Features
 
