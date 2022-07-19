@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.6.0...v5.0.0) (2022-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Increased Google Provider minimum version to 4.26 (#96)
+
+### Features
+
+* Adds support for labels ([#96](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/96)) ([b944015](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/b944015e25deb4584280b8732e2d1190112676ab))
+
 ## [4.6.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.5.0...v4.6.0) (2022-05-17)
 
 
