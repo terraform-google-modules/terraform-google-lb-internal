@@ -66,6 +66,12 @@ resource "google_compute_region_backend_service" "default" {
     }
   }
   health_checks = concat(google_compute_health_check.tcp.*.self_link, google_compute_health_check.http.*.self_link, google_compute_health_check.https.*.self_link)
+
+  failover_policy {
+    disable_connection_drain_on_failover = var.disable_connection_drain_on_failover
+    drop_traffic_if_unhealthy            = var.drop_traffic_if_unhealthy
+    failover_ratio                       = var.failover_ratio
+  }
 }
 
 resource "google_compute_health_check" "tcp" {

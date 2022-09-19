@@ -162,3 +162,21 @@ variable "labels" {
   default     = {}
   type        = map(string)
 }
+
+variable "disable_connection_drain_on_failover" {
+  description = "Controls if on failover or failback, connection drain will be honored or not"
+  default     = false
+  type        = bool
+}
+
+variable "drop_traffic_if_unhealthy" {
+  description = "Controls if no healthy VMs are detected in the primary and backup instance groups, traffic need to be dropped"
+  default     = false
+  type        = bool
+}
+
+variable "failover_ratio" {
+  description = "If the ratio of the healthy VMs in the primary backend is at or below this number, traffic arriving at the load-balanced IP will be directed to the failover backend "
+  default     = null
+  type        = number
+}
