@@ -170,7 +170,7 @@ variable "disable_connection_drain_on_failover" {
 }
 
 variable "drop_traffic_if_unhealthy" {
-  description = "Controls if no healthy VMs are detected in the primary and backup instance groups, traffic need to be dropped"
+  description = "Controls if when no healthy VMs are detected in the primary and backup instance groups, the traffic should be dropped or not"
   default     = false
   type        = bool
 }
