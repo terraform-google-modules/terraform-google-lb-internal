@@ -26,6 +26,7 @@ suites:
       name: terraform
       command_timeout: 1800
       root_module_directory: test/fixtures/minimal
+      verify_version: false
     verifier:
       name: terraform
       color: true
