@@ -16,11 +16,13 @@
 
 variable "project" {
   description = "The project to deploy to, if not set the default provider project is used."
+  type        = string
   default     = ""
 }
 
 variable "region" {
   description = "Region for cloud resources."
+  type        = string
   default     = "us-central1"
 }
 
@@ -32,21 +34,25 @@ variable "global_access" {
 
 variable "network" {
   description = "Name of the network to create resources in."
+  type        = string
   default     = "default"
 }
 
 variable "subnetwork" {
   description = "Name of the subnetwork to create resources in."
+  type        = string
   default     = "default"
 }
 
 variable "network_project" {
   description = "Name of the project for the network. Useful for shared VPC. Default is var.project."
+  type        = string
   default     = ""
 }
 
 variable "name" {
   description = "Name for the forwarding rule and prefix for supporting resources."
+  type        = string
 }
 
 variable "backends" {
@@ -56,6 +62,7 @@ variable "backends" {
 
 variable "session_affinity" {
   description = "The session affinity for the backends example: NONE, CLIENT_IP. Default is `NONE`."
+  type        = string
   default     = "NONE"
 }
 
@@ -119,11 +126,13 @@ variable "target_service_accounts" {
 
 variable "ip_address" {
   description = "IP address of the internal load balancer, if empty one will be assigned. Default is empty."
+  type        = string
   default     = null
 }
 
 variable "ip_protocol" {
   description = "The IP protocol for the backend and frontend forwarding rule. TCP or UDP."
+  type        = string
   default     = "TCP"
 }
 
