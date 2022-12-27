@@ -19,7 +19,7 @@ resource "random_string" "suffix" {
   length  = 8
   upper   = false
   lower   = true
-  number  = true
+  numeric = true
   special = false
 }
 
