@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v5.0.0...v5.0.1) (2022-12-29)
+
+
+### Bug Fixes
+
+* fixes lint issues and generates metadata ([#110](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/110)) ([d899925](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/d899925c53a49ba84b2abf463916b41ab7f9479d))
+
 ## [5.0.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v4.6.0...v5.0.0) (2022-06-27)
 
 
