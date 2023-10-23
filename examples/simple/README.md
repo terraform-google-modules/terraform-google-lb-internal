@@ -20,7 +20,7 @@ This example creates 3 instance groups. The first group is in us-central1-b and 
 
 ## Outputs
 
-No output.
+No outputs.
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
