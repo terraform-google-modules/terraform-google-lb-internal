@@ -48,35 +48,32 @@ module "instance_template3" {
 }
 
 module "mig1" {
-  source             = "terraform-google-modules/vm/google//modules/mig"
-  version            = "~> 10.0"
-  project_id         = var.project
-  subnetwork_project = var.subnetwork_project
-  region             = var.region
-  target_pools       = [module.gce-lb-fr.target_pool]
-  instance_template  = module.instance_template1.self_link
-  hostname           = "mig1"
-  named_ports        = local.named_ports
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "~> 10.0"
+  project_id        = var.project
+  region            = var.region
+  target_pools      = [module.gce-lb-fr.target_pool]
+  instance_template = module.instance_template1.self_link
+  hostname          = "mig1"
+  named_ports       = local.named_ports
 }
 
 module "mig2" {
-  source             = "terraform-google-modules/vm/google//modules/mig"
-  version            = "~> 10.0"
-  project_id         = var.project
-  subnetwork_project = var.subnetwork_project
-  region             = var.region
-  hostname           = "mig2"
-  instance_template  = module.instance_template2.self_link
-  named_ports        = local.named_ports
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "~> 10.0"
+  project_id        = var.project
+  region            = var.region
+  hostname          = "mig2"
+  instance_template = module.instance_template2.self_link
+  named_ports       = local.named_ports
 }
 
 module "mig3" {
-  source             = "terraform-google-modules/vm/google//modules/mig"
-  version            = "~> 10.0"
-  project_id         = var.project
-  subnetwork_project = var.subnetwork_project
-  region             = var.region
-  hostname           = "mig3"
-  instance_template  = module.instance_template3.self_link
-  named_ports        = local.named_ports
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "~> 10.0"
+  project_id        = var.project
+  region            = var.region
+  hostname          = "mig3"
+  instance_template = module.instance_template3.self_link
+  named_ports       = local.named_ports
 }
