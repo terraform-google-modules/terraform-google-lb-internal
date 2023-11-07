@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v5.0.1...v5.1.0) (2023-11-07)
+
+
+### Features
+
+* upgraded versions.tf to include minor bumps from tpg v5 ([7b96d49](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/7b96d49c926b6633f8660de5f5b6f5886315066c))
+
 ## [5.0.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v5.0.0...v5.0.1) (2022-12-29)
 
 
