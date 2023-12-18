@@ -26,7 +26,9 @@ module "gce-lb-fr" {
 }
 
 module "gce-ilb" {
-  source       = "../../"
+  source  = "terraform-google-modules/lb-internal/google"
+  version = "~> 5.0"
+
   project      = var.project
   region       = var.region
   name         = "group-ilb"
