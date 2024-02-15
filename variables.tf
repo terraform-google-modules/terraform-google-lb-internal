@@ -69,6 +69,7 @@ variable "session_affinity" {
 variable "ports" {
   description = "List of ports range to forward to backend services. Max is 5."
   type        = list(string)
+  default     = null
 }
 
 variable "all_ports" {
