@@ -56,7 +56,7 @@ module "gce-ilb" {
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |
 | network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project. | `string` | `""` | no |
-| ports | List of ports range to forward to backend services. Max is 5. | `list(string)` | n/a | yes |
+| ports | List of ports range to forward to backend services. Max is 5. | `list(string)` | `null` | no |
 | project | The project to deploy to, if not set the default provider project is used. | `string` | `""` | no |
 | region | Region for cloud resources. | `string` | `"us-central1"` | no |
 | service\_label | Service label is used to create internal DNS name | `string` | `null` | no |
