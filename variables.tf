@@ -171,3 +171,9 @@ variable "labels" {
   default     = {}
   type        = map(string)
 }
+
+variable "is_mirroring_collector" {
+  description = "Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL."
+  default     = false
+  type        = bool
+}
