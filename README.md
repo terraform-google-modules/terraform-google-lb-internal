@@ -52,6 +52,7 @@ module "gce-ilb" {
 | health\_check | Health check to determine whether instances are responsive and able to do work | <pre>object({<br>    type                = string<br>    check_interval_sec  = number<br>    healthy_threshold   = number<br>    timeout_sec         = number<br>    unhealthy_threshold = number<br>    response            = string<br>    proxy_header        = string<br>    port                = number<br>    port_name           = string<br>    request             = string<br>    request_path        = string<br>    host                = string<br>    enable_log          = bool<br>  })</pre> | n/a | yes |
 | ip\_address | IP address of the internal load balancer, if empty one will be assigned. Default is empty. | `string` | `null` | no |
 | ip\_protocol | The IP protocol for the backend and frontend forwarding rule. TCP or UDP. | `string` | `"TCP"` | no |
+| is\_mirroring\_collector | Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL. | `bool` | `false` | no |
 | labels | The labels to attach to resources created by this module. | `map(string)` | `{}` | no |
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |

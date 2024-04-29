@@ -177,3 +177,4 @@ variable "is_mirroring_collector" {
   default     = false
   type        = bool
 }
+
