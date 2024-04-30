@@ -28,20 +28,21 @@ data "google_compute_subnetwork" "network" {
 }
 
 resource "google_compute_forwarding_rule" "default" {
-  project               = var.project
-  name                  = var.name
-  region                = var.region
-  network               = data.google_compute_network.network.self_link
-  subnetwork            = data.google_compute_subnetwork.network.self_link
-  allow_global_access   = var.global_access
-  load_balancing_scheme = "INTERNAL"
-  backend_service       = google_compute_region_backend_service.default.self_link
-  ip_address            = var.ip_address
-  ip_protocol           = var.ip_protocol
-  ports                 = var.ports
-  all_ports             = var.all_ports
-  service_label         = var.service_label
-  labels                = var.labels
+  project                = var.project
+  name                   = var.name
+  region                 = var.region
+  network                = data.google_compute_network.network.self_link
+  subnetwork             = data.google_compute_subnetwork.network.self_link
+  allow_global_access    = var.global_access
+  load_balancing_scheme  = "INTERNAL"
+  is_mirroring_collector = var.is_mirroring_collector
+  backend_service        = google_compute_region_backend_service.default.self_link
+  ip_address             = var.ip_address
+  ip_protocol            = var.ip_protocol
+  ports                  = var.ports
+  all_ports              = var.all_ports
+  service_label          = var.service_label
+  labels                 = var.labels
 }
 
 resource "google_compute_region_backend_service" "default" {
