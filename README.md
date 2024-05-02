@@ -24,17 +24,41 @@ The following guides are available to assist with upgrades:
 
 ```hcl
 module "gce-ilb" {
-  source       = "GoogleCloudPlatform/lb-internal/google"
-  version      = "~> 2.0"
-  region       = var.region
-  name         = "group2-ilb"
-  ports        = ["80"]
-  health_check = var.health_check
-  source_tags  = ["allow-group1"]
-  target_tags  = ["allow-group2", "allow-group3"]
-  backends     = [
-    { group = module.mig2.instance_group, description = "", failover = false },
-    { group = module.mig3.instance_group, description = "", failover = false },
+  source            = "GoogleCloudPlatform/lb-internal/google"
+  version           = "~> 6.0"
+  region            = var.region
+  name              = "group2-ilb"
+  ports             = ["80"]
+  source_tags       = ["allow-group1"]
+  target_tags       = ["allow-group2", "allow-group3"]
+
+  health_check = {
+    type                = "http"
+    check_interval_sec  = 1
+    healthy_threshold   = 4
+    timeout_sec         = 1
+    unhealthy_threshold = 5
+    response            = ""
+    proxy_header        = "NONE"
+    port                = 80
+    port_name           = "health-check-port"
+    request             = ""
+    request_path        = "/"
+    host                = "1.2.3.4"
+    enable_log          = false
+  }
+
+  backends = [
+    {
+      group       = module.mig2.instance_group
+      description = ""
+      failover    = false
+    },
+    {
+      group       = module.mig3.instance_group
+      description = ""
+      failover    = false
+    },
   ]
 }
 ```
