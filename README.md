@@ -43,7 +43,7 @@ module "gce-ilb" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| all\_ports | Boolean for all\_ports setting on forwarding rule. | `bool` | `null` | no |
+| all\_ports | Boolean for all\_ports setting on forwarding rule. Cannot be used in conjunction with the `ports` argument. | `bool` | `null` | no |
 | backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | `list(any)` | n/a | yes |
 | connection\_draining\_timeout\_sec | Time for which instance will be drained | `number` | `null` | no |
 | create\_backend\_firewall | Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately. | `bool` | `true` | no |
@@ -57,7 +57,7 @@ module "gce-ilb" {
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |
 | network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project. | `string` | `""` | no |
-| ports | List of ports range to forward to backend services. Max is 5. | `list(string)` | `null` | no |
+| ports | List of ports range to forward to backend services. Max is 5. Cannot be used in conjunction with the `all_ports` argument. | `list(string)` | `null` | no |
 | project | The project to deploy to, if not set the default provider project is used. | `string` | `""` | no |
 | region | Region for cloud resources. | `string` | `"us-central1"` | no |
 | service\_label | Service label is used to create internal DNS name | `string` | `null` | no |
