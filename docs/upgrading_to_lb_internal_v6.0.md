@@ -1,6 +1,12 @@
 # Upgrading to v6.0 (from v5.x)
 
-The v6.0 release is a backwards incompatible release. In v5 and below, there was no mention of the mutual exclusivity between the `ports` and `all_ports` arguments. When a consumer wanted to use the `all_ports` argument, they had to go through a process of trial and error to figure out how to successfully deploy a load balancer with this module. To simplify usage of the `all_ports` argument, the `ports` argument is no longer required and now defaults to `null`.
+The v6.0 release is a backwards incompatible release.
+
+# Minimum Terraform Version
+Minimum terraform version required is 1.3
+
+# ports
+In v5 and below, there was no mention of the mutual exclusivity between the `ports` and `all_ports` arguments. When a consumer wanted to use the `all_ports` argument, they had to go through a process of trial and error to figure out how to successfully deploy a load balancer with this module. To simplify usage of the `all_ports` argument, the `ports` argument is no longer required and now defaults to `null`.
 
 ## Upgrade Guidance
 

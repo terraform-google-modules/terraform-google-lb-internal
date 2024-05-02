@@ -7,11 +7,7 @@ Modular Internal Load Balancer for GCE using forwarding rules.
 * **Internal load balancer**
 
 ## Compatibility
-This module is meant for use with Terraform 0.13+ and tested using Terraform 1.0+. If you find incompatibilities using Terraform >=0.13, please open an issue.
- If you haven't
-[upgraded](https://www.terraform.io/upgrade-guides/0-13.html) and need a Terraform
-0.12.x-compatible version of this module, the last released version
-intended for Terraform 0.12.x is [v2.3.0](https://registry.terraform.io/modules/terraform-google-modules/-lb-internal/google/v2.3.0).
+This module is meant for use with Terraform 1.3+ and tested using Terraform 1.3+. If you find incompatibilities using Terraform >=1.3, please open an issue.
 
 ## Upgrading
 
@@ -74,7 +70,7 @@ module "gce-ilb" {
 | create\_health\_check\_firewall | Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail. | `bool` | `true` | no |
 | firewall\_enable\_logging | Controls if firewall rules that are created are to have logging configured. This will be ignored for firewall rules that are not created. | `bool` | `false` | no |
 | global\_access | Allow all regions on the same VPC network access. | `bool` | `false` | no |
-| health\_check | Health check to determine whether instances are responsive and able to do work | <pre>object({<br>    type                = string<br>    check_interval_sec  = number<br>    healthy_threshold   = number<br>    timeout_sec         = number<br>    unhealthy_threshold = number<br>    response            = string<br>    proxy_header        = string<br>    port                = number<br>    port_name           = string<br>    request             = string<br>    request_path        = string<br>    host                = string<br>    enable_log          = bool<br>  })</pre> | n/a | yes |
+| health\_check | Health check to determine whether instances are responsive and able to do work | <pre>object({<br>    type                = string<br>    check_interval_sec  = optional(number)<br>    healthy_threshold   = optional(number)<br>    timeout_sec         = optional(number)<br>    unhealthy_threshold = optional(number)<br>    response            = optional(string)<br>    proxy_header        = optional(string)<br>    port                = optional(number)<br>    port_name           = optional(string)<br>    request             = optional(string)<br>    request_path        = optional(string)<br>    host                = optional(string)<br>    enable_log          = optional(bool)<br>  })</pre> | n/a | yes |
 | ip\_address | IP address of the internal load balancer, if empty one will be assigned. Default is empty. | `string` | `null` | no |
 | ip\_protocol | The IP protocol for the backend and frontend forwarding rule. TCP or UDP. | `string` | `"TCP"` | no |
 | is\_mirroring\_collector | Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL. | `bool` | `false` | no |
