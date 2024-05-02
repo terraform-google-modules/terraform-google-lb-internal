@@ -67,13 +67,13 @@ variable "session_affinity" {
 }
 
 variable "ports" {
-  description = "List of ports range to forward to backend services. Max is 5."
+  description = "List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive."
   type        = list(string)
   default     = null
 }
 
 variable "all_ports" {
-  description = "Boolean for all_ports setting on forwarding rule."
+  description = "Boolean for all_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive."
   type        = bool
   default     = null
 }
