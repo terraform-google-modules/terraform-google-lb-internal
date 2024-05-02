@@ -15,25 +15,50 @@ intended for Terraform 0.12.x is [v2.3.0](https://registry.terraform.io/modules/
 
 ## Upgrading
 
-The current version is 2.X. The following guides are available to assist with upgrades:
+The following guides are available to assist with upgrades:
 
 - [1.X -> 2.0](./docs/upgrading_to_lb_internal_v2.0.md)
+- [5.x -> 6.x](./docs/upgrading_to_lb_internal_v6.md)
 
 ## Usage
 
 ```hcl
 module "gce-ilb" {
-  source       = "GoogleCloudPlatform/lb-internal/google"
-  version      = "~> 2.0"
-  region       = var.region
-  name         = "group2-ilb"
-  ports        = ["80"]
-  health_check = var.health_check
-  source_tags  = ["allow-group1"]
-  target_tags  = ["allow-group2", "allow-group3"]
-  backends     = [
-    { group = module.mig2.instance_group, description = "", failover = false },
-    { group = module.mig3.instance_group, description = "", failover = false },
+  source            = "GoogleCloudPlatform/lb-internal/google"
+  version           = "~> 6.0"
+  region            = var.region
+  name              = "group2-ilb"
+  ports             = ["80"]
+  source_tags       = ["allow-group1"]
+  target_tags       = ["allow-group2", "allow-group3"]
+
+  health_check = {
+    type                = "http"
+    check_interval_sec  = 1
+    healthy_threshold   = 4
+    timeout_sec         = 1
+    unhealthy_threshold = 5
+    response            = ""
+    proxy_header        = "NONE"
+    port                = 80
+    port_name           = "health-check-port"
+    request             = ""
+    request_path        = "/"
+    host                = "1.2.3.4"
+    enable_log          = false
+  }
+
+  backends = [
+    {
+      group       = module.mig2.instance_group
+      description = ""
+      failover    = false
+    },
+    {
+      group       = module.mig3.instance_group
+      description = ""
+      failover    = false
+    },
   ]
 }
 ```
@@ -42,7 +67,7 @@ module "gce-ilb" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| all\_ports | Boolean for all\_ports setting on forwarding rule. | `bool` | `null` | no |
+| all\_ports | Boolean for all\_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive. | `bool` | `null` | no |
 | backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | `list(any)` | n/a | yes |
 | connection\_draining\_timeout\_sec | Time for which instance will be drained | `number` | `null` | no |
 | create\_backend\_firewall | Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately. | `bool` | `true` | no |
@@ -57,7 +82,7 @@ module "gce-ilb" {
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |
 | network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project. | `string` | `""` | no |
-| ports | List of ports range to forward to backend services. Max is 5. | `list(string)` | n/a | yes |
+| ports | List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive. | `list(string)` | `null` | no |
 | project | The project to deploy to, if not set the default provider project is used. | `string` | `""` | no |
 | region | Region for cloud resources. | `string` | `"us-central1"` | no |
 | service\_label | Service label is used to create internal DNS name | `string` | `null` | no |
