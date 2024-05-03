@@ -16,7 +16,7 @@
 
 module "instance_template1" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
-  version            = "~> 10.0"
+  version            = "~> 11.0"
   project_id         = var.project
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
@@ -27,7 +27,7 @@ module "instance_template1" {
 
 module "instance_template2" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
-  version            = "~> 10.0"
+  version            = "~> 11.0"
   project_id         = var.project
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
@@ -38,7 +38,7 @@ module "instance_template2" {
 
 module "instance_template3" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
-  version            = "~> 10.0"
+  version            = "~> 11.0"
   project_id         = var.project
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
@@ -49,7 +49,7 @@ module "instance_template3" {
 
 module "mig1" {
   source            = "terraform-google-modules/vm/google//modules/mig"
-  version           = "~> 10.0"
+  version           = "~> 11.0"
   project_id        = var.project
   region            = var.region
   target_pools      = [module.gce-lb-fr.target_pool]
@@ -60,7 +60,7 @@ module "mig1" {
 
 module "mig2" {
   source            = "terraform-google-modules/vm/google//modules/mig"
-  version           = "~> 10.0"
+  version           = "~> 11.0"
   project_id        = var.project
   region            = var.region
   hostname          = "mig2"
@@ -70,7 +70,7 @@ module "mig2" {
 
 module "mig3" {
   source            = "terraform-google-modules/vm/google//modules/mig"
-  version           = "~> 10.0"
+  version           = "~> 11.0"
   project_id        = var.project
   region            = var.region
   hostname          = "mig3"
