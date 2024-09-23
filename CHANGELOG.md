@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.1.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v6.0.0...v6.1.0) (2024-08-29)
+
+
+### Features
+
+* **deps:** Update Terraform Google Provider to v6 (major) ([#142](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/142)) ([5f92c94](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/5f92c945122080fd1de1b78eeba65500c639f504))
+
 ## [6.0.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v5.1.0...v6.0.0) (2024-05-03)
 
 
