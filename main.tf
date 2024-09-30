@@ -58,12 +58,14 @@ resource "google_compute_region_backend_service" "default" {
   # Do not try to add timeout_sec, as it is has no impact. See https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/53#issuecomment-893427675
   connection_draining_timeout_sec = var.connection_draining_timeout_sec
   session_affinity                = var.session_affinity
+
   dynamic "backend" {
     for_each = var.backends
     content {
-      group       = lookup(backend.value, "group", null)
-      description = lookup(backend.value, "description", null)
-      failover    = lookup(backend.value, "failover", null)
+      group          = lookup(backend.value, "group", null)
+      description    = lookup(backend.value, "description", null)
+      failover       = lookup(backend.value, "failover", null)
+      balancing_mode = lookup(backend.value, "balancing_mode", "CONNECTION")
     }
   }
   health_checks = concat(google_compute_health_check.tcp[*].self_link, google_compute_health_check.http[*].self_link, google_compute_health_check.https[*].self_link)
