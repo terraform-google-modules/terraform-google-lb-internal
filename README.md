@@ -75,6 +75,7 @@ module "gce-ilb" {
 | ip\_protocol | The IP protocol for the backend and frontend forwarding rule. TCP or UDP. | `string` | `"TCP"` | no |
 | is\_mirroring\_collector | Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL. | `bool` | `false` | no |
 | labels | The labels to attach to resources created by this module. | `map(string)` | `{}` | no |
+| log\_config | This field denotes the logging options for the load balancer traffic served by this backend service. | <pre>object({<br>    enable      = bool<br>    sample_rate = number<br>  })</pre> | <pre>{<br>  "enable": true,<br>  "sample_rate": 1<br>}</pre> | no |
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |
 | network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project. | `string` | `""` | no |
