@@ -68,7 +68,16 @@ resource "google_compute_region_backend_service" "default" {
       balancing_mode = lookup(backend.value, "balancing_mode", "CONNECTION")
     }
   }
+
   health_checks = concat(google_compute_health_check.tcp[*].self_link, google_compute_health_check.http[*].self_link, google_compute_health_check.https[*].self_link)
+
+  dynamic "log_config" {
+    for_each = var.log_config.enable ? [1] : []
+    content {
+      enable      = var.log_config.enable
+      sample_rate = var.log_config.sample_rate
+    }
+  }
 }
 
 resource "google_compute_health_check" "tcp" {
