@@ -18,17 +18,17 @@
 # Using a data source here to access both self_link and name by looking up the network name.
 data "google_compute_network" "network" {
   name    = var.network
-  project = var.network_project == "" ? var.project : var.network_project
+  project = var.network_project == "" ? var.project_id : var.network_project
 }
 
 data "google_compute_subnetwork" "network" {
   name    = var.subnetwork
-  project = var.network_project == "" ? var.project : var.network_project
+  project = var.network_project == "" ? var.project_id : var.network_project
   region  = var.region
 }
 
 resource "google_compute_forwarding_rule" "default" {
-  project                = var.project
+  project                = var.project_id
   name                   = var.name
   region                 = var.region
   network                = data.google_compute_network.network.self_link
@@ -46,7 +46,7 @@ resource "google_compute_forwarding_rule" "default" {
 }
 
 resource "google_compute_region_backend_service" "default" {
-  project = var.project
+  project = var.project_id
   name = {
     "tcp"   = "${var.name}-with-tcp-hc",
     "http"  = "${var.name}-with-http-hc",
@@ -74,7 +74,7 @@ resource "google_compute_region_backend_service" "default" {
 resource "google_compute_health_check" "tcp" {
   provider = google-beta
   count    = var.health_check["type"] == "tcp" ? 1 : 0
-  project  = var.project
+  project  = var.project_id
   name     = "${var.name}-hc-tcp"
 
   timeout_sec         = var.health_check["timeout_sec"]
@@ -101,7 +101,7 @@ resource "google_compute_health_check" "tcp" {
 resource "google_compute_health_check" "http" {
   provider = google-beta
   count    = var.health_check["type"] == "http" ? 1 : 0
-  project  = var.project
+  project  = var.project_id
   name     = "${var.name}-hc-http"
 
   timeout_sec         = var.health_check["timeout_sec"]
@@ -129,7 +129,7 @@ resource "google_compute_health_check" "http" {
 resource "google_compute_health_check" "https" {
   provider = google-beta
   count    = var.health_check["type"] == "https" ? 1 : 0
-  project  = var.project
+  project  = var.project_id
   name     = "${var.name}-hc-https"
 
   timeout_sec         = var.health_check["timeout_sec"]
@@ -156,7 +156,7 @@ resource "google_compute_health_check" "https" {
 
 resource "google_compute_firewall" "default-ilb-fw" {
   count   = var.create_backend_firewall ? 1 : 0
-  project = var.network_project == "" ? var.project : var.network_project
+  project = var.network_project == "" ? var.project_id : var.network_project
   name    = "${var.name}-ilb-fw"
   network = data.google_compute_network.network.name
 
@@ -181,7 +181,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
 
 resource "google_compute_firewall" "default-hc" {
   count   = var.create_health_check_firewall ? 1 : 0
-  project = var.network_project == "" ? var.project : var.network_project
+  project = var.network_project == "" ? var.project_id : var.network_project
   name    = "${var.name}-hc"
   network = data.google_compute_network.network.name
 
