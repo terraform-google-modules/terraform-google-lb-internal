@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,22 +53,51 @@ spec:
         description: Name of the network to create resources in.
         varType: string
         defaultValue: default
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              version: ">= 9.1"
+            spec:
+              outputExpr: network_name
       - name: subnetwork
         description: Name of the subnetwork to create resources in.
         varType: string
         defaultValue: default
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/subnets
+              version: ">= 9.1"
+            spec:
+              outputExpr: subnets_names[0]
       - name: network_project
         description: Name of the project for the network. Useful for shared VPC. Default is var.project_id.
         varType: string
         defaultValue: ""
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              version: ">= 9.1"
+            spec:
+              outputExpr: project_id
       - name: name
         description: Name for the forwarding rule and prefix for supporting resources.
         varType: string
         required: true
       - name: backends
         description: List of backends, should be a map of key-value pairs for each backend, must have the 'group' key.
-        varType: list(any)
+        varType: |-
+          list(object({
+              group       = string
+              description = optional(string)
+              failover    = optional(bool)
+            }))
         required: true
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-vm//modules/mig
+              version: ">= 12.0"
+            spec:
+              outputExpr: "{\"group\": instance_group}"
       - name: session_affinity
         description: "The session affinity for the backends example: NONE, CLIENT_IP. Default is `NONE`."
         varType: string
@@ -104,23 +133,41 @@ spec:
       - name: source_tags
         description: List of source tags for traffic between the internal load balancer.
         varType: list(string)
-        required: true
+        defaultValue: []
       - name: target_tags
         description: List of target tags for traffic between the internal load balancer.
         varType: list(string)
-        required: true
+        defaultValue: []
       - name: source_ip_ranges
         description: List of source ip ranges for traffic between the internal load balancer.
         varType: list(string)
       - name: source_service_accounts
         description: List of source service accounts for traffic between the internal load balancer.
         varType: list(string)
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
+              version: ">= 4.4"
+            spec:
+              outputExpr: email
       - name: target_service_accounts
         description: List of target service accounts for traffic between the internal load balancer.
         varType: list(string)
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
+              version: ">= 4.4"
+            spec:
+              outputExpr: email
       - name: ip_address
         description: IP address of the internal load balancer, if empty one will be assigned. Default is empty.
         varType: string
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-address//modules/ip_address
+              version: ">= 4.0"
+            spec:
+              outputExpr: addresses[0]
       - name: ip_protocol
         description: The IP protocol for the backend and frontend forwarding rule. TCP or UDP.
         varType: string

@@ -64,7 +64,7 @@ module "gce-ilb" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | all\_ports | Boolean for all\_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive. | `bool` | `false` | no |
-| backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | `list(any)` | n/a | yes |
+| backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | <pre>list(object({<br>    group       = string<br>    description = optional(string)<br>    failover    = optional(bool)<br>  }))</pre> | n/a | yes |
 | connection\_draining\_timeout\_sec | Time for which instance will be drained | `number` | `null` | no |
 | create\_backend\_firewall | Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately. | `bool` | `true` | no |
 | create\_health\_check\_firewall | Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail. | `bool` | `true` | no |
@@ -85,10 +85,10 @@ module "gce-ilb" {
 | session\_affinity | The session affinity for the backends example: NONE, CLIENT\_IP. Default is `NONE`. | `string` | `"NONE"` | no |
 | source\_ip\_ranges | List of source ip ranges for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | source\_service\_accounts | List of source service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
-| source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | n/a | yes |
+| source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
 | subnetwork | Name of the subnetwork to create resources in. | `string` | `"default"` | no |
 | target\_service\_accounts | List of target service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
-| target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | n/a | yes |
+| target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
 
 ## Outputs
 

@@ -55,7 +55,11 @@ variable "name" {
 
 variable "backends" {
   description = "List of backends, should be a map of key-value pairs for each backend, must have the 'group' key."
-  type        = list(any)
+  type = list(object({
+    group       = string
+    description = optional(string)
+    failover    = optional(bool)
+  }))
 }
 
 variable "session_affinity" {
@@ -98,11 +102,13 @@ variable "health_check" {
 variable "source_tags" {
   description = "List of source tags for traffic between the internal load balancer."
   type        = list(string)
+  default     = []
 }
 
 variable "target_tags" {
   description = "List of target tags for traffic between the internal load balancer."
   type        = list(string)
+  default     = []
 }
 
 variable "source_ip_ranges" {

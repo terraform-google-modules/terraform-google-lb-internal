@@ -166,9 +166,9 @@ resource "google_compute_firewall" "default-ilb-fw" {
   }
 
   source_ranges           = var.source_ip_ranges
-  source_tags             = var.source_tags
+  source_tags             = length(var.source_tags) > 0 ? var.source_tags : null
   source_service_accounts = var.source_service_accounts
-  target_tags             = var.target_tags
+  target_tags             = length(var.target_tags) > 0 ? var.target_tags : null
   target_service_accounts = var.target_service_accounts
 
   dynamic "log_config" {
@@ -191,7 +191,7 @@ resource "google_compute_firewall" "default-hc" {
   }
 
   source_ranges           = ["130.211.0.0/22", "35.191.0.0/16"]
-  target_tags             = var.target_tags
+  target_tags             = length(var.target_tags) > 0 ? var.target_tags : null
   target_service_accounts = var.target_service_accounts
 
   dynamic "log_config" {
