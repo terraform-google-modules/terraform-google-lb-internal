@@ -29,7 +29,7 @@ module "gce-ilb" {
   source  = "terraform-google-modules/lb-internal/google"
   version = "~> 5.0"
 
-  project_id      = var.project_id
+  project_id   = var.project_id
   region       = var.region
   name         = "group-ilb"
   ports        = [local.named_ports[0].port]
