@@ -12,7 +12,7 @@ This example creates 3 instance groups. The first group is in us-central1-b and 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | network | Name of the network to create resources in. | `string` | n/a | yes |
-| project | The project id to deploy to | `string` | n/a | yes |
+| project\_id | The project id to deploy to | `string` | n/a | yes |
 | region | Region for cloud resources. | `string` | n/a | yes |
 | service\_account | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account | <pre>object({<br>    email  = string<br>    scopes = set(string)<br>  })</pre> | n/a | yes |
 | subnetwork | Name of the subnetwork to create resources in. | `string` | n/a | yes |

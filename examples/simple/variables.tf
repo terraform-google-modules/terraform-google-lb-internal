@@ -42,7 +42,7 @@ variable "subnetwork_project" {
   type        = string
 }
 
-variable "project" {
+variable "project_id" {
   description = "The project id to deploy to"
   type        = string
 }

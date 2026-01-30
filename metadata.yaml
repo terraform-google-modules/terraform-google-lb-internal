@@ -24,7 +24,7 @@ spec:
     source:
       repo: https://github.com/vandnagarggoogle/terraform-google-lb-internal.git
       sourceType: git
-    version: 7.1.0
+    version: 8.0.0
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"

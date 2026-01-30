@@ -15,6 +15,7 @@ The following guides are available to assist with upgrades:
 
 - [1.X -> 2.0](./docs/upgrading_to_lb_internal_v2.0.md)
 - [5.x -> 6.x](./docs/upgrading_to_lb_internal_v6.md)
+- [7.x -> 8.x](./docs/upgrading_to_lb_internal_v8.md)
 
 ## Usage
 
