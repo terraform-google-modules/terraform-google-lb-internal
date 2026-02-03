@@ -62,7 +62,7 @@ module "test_ilb" {
   source  = "GoogleCloudPlatform/lb-internal/google"
   version = "~> 7.0"
 
-  project      = var.project_id
+  project_id   = var.project_id
   network      = google_compute_network.test.name
   subnetwork   = google_compute_subnetwork.test.name
   region       = var.region
