@@ -19,7 +19,7 @@ module "gce-lb-fr" {
   version      = "~> 5.0"
   region       = var.region
   network      = var.network
-  project      = var.project
+  project      = var.project_id
   name         = "group1-lb"
   service_port = local.named_ports[0].port
   target_tags  = ["allow-group1"]

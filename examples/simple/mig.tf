@@ -17,7 +17,7 @@
 module "instance_template1" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
   version            = "~> 12.0"
-  project_id         = var.project
+  project_id         = var.project_id
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
   service_account    = var.service_account
@@ -28,7 +28,7 @@ module "instance_template1" {
 module "instance_template2" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
   version            = "~> 12.0"
-  project_id         = var.project
+  project_id         = var.project_id
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
   service_account    = var.service_account
@@ -39,7 +39,7 @@ module "instance_template2" {
 module "instance_template3" {
   source             = "terraform-google-modules/vm/google//modules/instance_template"
   version            = "~> 12.0"
-  project_id         = var.project
+  project_id         = var.project_id
   subnetwork         = var.subnetwork
   subnetwork_project = var.subnetwork_project
   service_account    = var.service_account
@@ -50,7 +50,7 @@ module "instance_template3" {
 module "mig1" {
   source            = "terraform-google-modules/vm/google//modules/mig"
   version           = "~> 12.0"
-  project_id        = var.project
+  project_id        = var.project_id
   region            = var.region
   target_pools      = [module.gce-lb-fr.target_pool]
   instance_template = module.instance_template1.self_link
@@ -61,7 +61,7 @@ module "mig1" {
 module "mig2" {
   source            = "terraform-google-modules/vm/google//modules/mig"
   version           = "~> 12.0"
-  project_id        = var.project
+  project_id        = var.project_id
   region            = var.region
   hostname          = "mig2"
   instance_template = module.instance_template2.self_link
@@ -71,7 +71,7 @@ module "mig2" {
 module "mig3" {
   source            = "terraform-google-modules/vm/google//modules/mig"
   version           = "~> 12.0"
-  project_id        = var.project
+  project_id        = var.project_id
   region            = var.region
   hostname          = "mig3"
   instance_template = module.instance_template3.self_link
