@@ -59,7 +59,7 @@ resource "google_compute_subnetwork" "test" {
 
 # [START cloudloadbalancing_int_tcp_udp_minimal]
 module "test_ilb" {
-  source  = "../../"
+  source = "../../"
 
   project_id   = var.project_id
   network      = google_compute_network.test.name
