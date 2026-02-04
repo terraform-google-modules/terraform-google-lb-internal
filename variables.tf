@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-variable "project" {
-  description = "The project to deploy to, if not set the default provider project is used."
+variable "project_id" {
+  description = "The project_id to deploy to."
   type        = string
-  default     = ""
 }
 
 variable "region" {
   description = "Region for cloud resources."
   type        = string
-  default     = "us-central1"
 }
 
 variable "global_access" {
@@ -45,7 +43,7 @@ variable "subnetwork" {
 }
 
 variable "network_project" {
-  description = "Name of the project for the network. Useful for shared VPC. Default is var.project."
+  description = "Name of the project for the network. Useful for shared VPC. Default is var.project_id."
   type        = string
   default     = ""
 }
@@ -57,7 +55,11 @@ variable "name" {
 
 variable "backends" {
   description = "List of backends, should be a map of key-value pairs for each backend, must have the 'group' key."
-  type        = list(any)
+  type = list(object({
+    group       = string
+    description = optional(string)
+    failover    = optional(bool)
+  }))
 }
 
 variable "session_affinity" {
@@ -69,13 +71,13 @@ variable "session_affinity" {
 variable "ports" {
   description = "List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive."
   type        = list(string)
-  default     = null
+  default     = ["80"]
 }
 
 variable "all_ports" {
   description = "Boolean for all_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive."
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "health_check" {
@@ -88,23 +90,25 @@ variable "health_check" {
     unhealthy_threshold = optional(number)
     response            = optional(string)
     proxy_header        = optional(string)
-    port                = optional(number)
+    port                = optional(number, 80)
     port_name           = optional(string)
     request             = optional(string)
     request_path        = optional(string)
     host                = optional(string)
-    enable_log          = optional(bool)
+    enable_log          = optional(bool, false)
   })
 }
 
 variable "source_tags" {
   description = "List of source tags for traffic between the internal load balancer."
   type        = list(string)
+  default     = []
 }
 
 variable "target_tags" {
   description = "List of target tags for traffic between the internal load balancer."
   type        = list(string)
+  default     = []
 }
 
 variable "source_ip_ranges" {

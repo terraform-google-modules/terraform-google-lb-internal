@@ -15,6 +15,7 @@ The following guides are available to assist with upgrades:
 
 - [1.X -> 2.0](./docs/upgrading_to_lb_internal_v2.0.md)
 - [5.x -> 6.x](./docs/upgrading_to_lb_internal_v6.md)
+- [7.x -> 8.x](./docs/upgrading_to_lb_internal_v8.md)
 
 ## Usage
 
@@ -63,32 +64,32 @@ module "gce-ilb" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| all\_ports | Boolean for all\_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive. | `bool` | `null` | no |
-| backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | `list(any)` | n/a | yes |
+| all\_ports | Boolean for all\_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive. | `bool` | `false` | no |
+| backends | List of backends, should be a map of key-value pairs for each backend, must have the 'group' key. | <pre>list(object({<br>    group       = string<br>    description = optional(string)<br>    failover    = optional(bool)<br>  }))</pre> | n/a | yes |
 | connection\_draining\_timeout\_sec | Time for which instance will be drained | `number` | `null` | no |
 | create\_backend\_firewall | Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately. | `bool` | `true` | no |
 | create\_health\_check\_firewall | Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail. | `bool` | `true` | no |
 | firewall\_enable\_logging | Controls if firewall rules that are created are to have logging configured. This will be ignored for firewall rules that are not created. | `bool` | `false` | no |
 | global\_access | Allow all regions on the same VPC network access. | `bool` | `false` | no |
-| health\_check | Health check to determine whether instances are responsive and able to do work | <pre>object({<br>    type                = string<br>    check_interval_sec  = optional(number)<br>    healthy_threshold   = optional(number)<br>    timeout_sec         = optional(number)<br>    unhealthy_threshold = optional(number)<br>    response            = optional(string)<br>    proxy_header        = optional(string)<br>    port                = optional(number)<br>    port_name           = optional(string)<br>    request             = optional(string)<br>    request_path        = optional(string)<br>    host                = optional(string)<br>    enable_log          = optional(bool)<br>  })</pre> | n/a | yes |
+| health\_check | Health check to determine whether instances are responsive and able to do work | <pre>object({<br>    type                = string<br>    check_interval_sec  = optional(number)<br>    healthy_threshold   = optional(number)<br>    timeout_sec         = optional(number)<br>    unhealthy_threshold = optional(number)<br>    response            = optional(string)<br>    proxy_header        = optional(string)<br>    port                = optional(number, 80)<br>    port_name           = optional(string)<br>    request             = optional(string)<br>    request_path        = optional(string)<br>    host                = optional(string)<br>    enable_log          = optional(bool, false)<br>  })</pre> | n/a | yes |
 | ip\_address | IP address of the internal load balancer, if empty one will be assigned. Default is empty. | `string` | `null` | no |
 | ip\_protocol | The IP protocol for the backend and frontend forwarding rule. TCP or UDP. | `string` | `"TCP"` | no |
 | is\_mirroring\_collector | Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL. | `bool` | `false` | no |
 | labels | The labels to attach to resources created by this module. | `map(string)` | `{}` | no |
 | name | Name for the forwarding rule and prefix for supporting resources. | `string` | n/a | yes |
 | network | Name of the network to create resources in. | `string` | `"default"` | no |
-| network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project. | `string` | `""` | no |
-| ports | List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive. | `list(string)` | `null` | no |
-| project | The project to deploy to, if not set the default provider project is used. | `string` | `""` | no |
-| region | Region for cloud resources. | `string` | `"us-central1"` | no |
+| network\_project | Name of the project for the network. Useful for shared VPC. Default is var.project\_id. | `string` | `""` | no |
+| ports | List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive. | `list(string)` | <pre>[<br>  "80"<br>]</pre> | no |
+| project\_id | The project\_id to deploy to. | `string` | n/a | yes |
+| region | Region for cloud resources. | `string` | n/a | yes |
 | service\_label | Service label is used to create internal DNS name | `string` | `null` | no |
 | session\_affinity | The session affinity for the backends example: NONE, CLIENT\_IP. Default is `NONE`. | `string` | `"NONE"` | no |
 | source\_ip\_ranges | List of source ip ranges for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | source\_service\_accounts | List of source service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
-| source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | n/a | yes |
+| source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
 | subnetwork | Name of the subnetwork to create resources in. | `string` | `"default"` | no |
 | target\_service\_accounts | List of target service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
-| target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | n/a | yes |
+| target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
 
 ## Outputs
 

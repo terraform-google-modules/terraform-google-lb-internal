@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,163 +19,209 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 spec:
-  title: Internal Load Balancer Terraform Module
-  source:
-    repo: https://github.com/terraform-google-modules/terraform-google-lb-internal
-    sourceType: git
-  version: 7.1.0
-  actuationTool:
-    type: Terraform
-    version: '>= 0.13'
-  examples:
-  - name: minimal
-    location: examples/minimal
-  - name: simple
-    location: examples/simple
-  variables:
-  - name: all_ports
-    description: Boolean for all_ports setting on forwarding rule.
-    type: bool
-    required: false
-  - name: backends
-    description: List of backends, should be a map of key-value pairs for each backend, must have the 'group' key.
-    type: list(any)
-    required: true
-  - name: connection_draining_timeout_sec
-    description: Time for which instance will be drained
-    type: number
-    required: false
-  - name: create_backend_firewall
-    description: Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately.
-    type: bool
-    default: true
-    required: false
-  - name: create_health_check_firewall
-    description: Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail.
-    type: bool
-    default: true
-    required: false
-  - name: firewall_enable_logging
-    description: Controls if firewall rules that are created are to have logging configured. This will be ignored for firewall rules that are not created.
-    type: bool
-    default: false
-    required: false
-  - name: global_access
-    description: Allow all regions on the same VPC network access.
-    type: bool
-    default: false
-    required: false
-  - name: health_check
-    description: Health check to determine whether instances are responsive and able to do work
-    type: |-
-      object({
-          type                = string
-          check_interval_sec  = number
-          healthy_threshold   = number
-          timeout_sec         = number
-          unhealthy_threshold = number
-          response            = string
-          proxy_header        = string
-          port                = number
-          port_name           = string
-          request             = string
-          request_path        = string
-          host                = string
-          enable_log          = bool
-        })
-    required: true
-  - name: ip_address
-    description: IP address of the internal load balancer, if empty one will be assigned. Default is empty.
-    type: string
-    required: false
-  - name: ip_protocol
-    description: The IP protocol for the backend and frontend forwarding rule. TCP or UDP.
-    type: string
-    default: TCP
-    required: false
-  - name: labels
-    description: The labels to attach to resources created by this module.
-    type: map(string)
-    default: {}
-    required: false
-  - name: name
-    description: Name for the forwarding rule and prefix for supporting resources.
-    type: string
-    required: true
-  - name: network
-    description: Name of the network to create resources in.
-    type: string
-    default: default
-    required: false
-  - name: network_project
-    description: Name of the project for the network. Useful for shared VPC. Default is var.project.
-    type: string
-    default: ""
-    required: false
-  - name: ports
-    description: List of ports range to forward to backend services. Max is 5.
-    type: list(string)
-    required: true
-  - name: project
-    description: The project to deploy to, if not set the default provider project is used.
-    type: string
-    default: ""
-    required: false
-  - name: region
-    description: Region for cloud resources.
-    type: string
-    default: us-central1
-    required: false
-  - name: service_label
-    description: Service label is used to create internal DNS name
-    type: string
-    required: false
-  - name: session_affinity
-    description: 'The session affinity for the backends example: NONE, CLIENT_IP. Default is `NONE`.'
-    type: string
-    default: NONE
-    required: false
-  - name: source_ip_ranges
-    description: List of source ip ranges for traffic between the internal load balancer.
-    type: list(string)
-    required: false
-  - name: source_service_accounts
-    description: List of source service accounts for traffic between the internal load balancer.
-    type: list(string)
-    required: false
-  - name: source_tags
-    description: List of source tags for traffic between the internal load balancer.
-    type: list(string)
-    required: true
-  - name: subnetwork
-    description: Name of the subnetwork to create resources in.
-    type: string
-    default: default
-    required: false
-  - name: target_service_accounts
-    description: List of target service accounts for traffic between the internal load balancer.
-    type: list(string)
-    required: false
-  - name: target_tags
-    description: List of target tags for traffic between the internal load balancer.
-    type: list(string)
-    required: true
-  outputs:
-  - name: forwarding_rule
-    description: The forwarding rule self_link.
-  - name: forwarding_rule_id
-    description: The forwarding rule id.
-  - name: ip_address
-    description: The internal IP assigned to the regional forwarding rule.
-  roles:
-  - level: Project
+  info:
+    title: Internal Load Balancer Terraform Module
+    source:
+      repo: https://github.com/terraform-google-modules/terraform-google-lb-internal.git
+      sourceType: git
+    version: 7.1.0
+    actuationTool:
+      flavor: Terraform
+      version: ">= 1.3"
+    description: {}
+  content:
+    examples:
+      - name: minimal
+        location: examples/minimal
+      - name: simple
+        location: examples/simple
+  interfaces:
+    variables:
+      - name: project_id
+        description: The project_id to deploy to.
+        varType: string
+        required: true
+      - name: region
+        description: Region for cloud resources.
+        varType: string
+        required: true
+      - name: global_access
+        description: Allow all regions on the same VPC network access.
+        varType: bool
+        defaultValue: false
+      - name: network
+        description: Name of the network to create resources in.
+        varType: string
+        defaultValue: default
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              version: ">= 9.1"
+            spec:
+              outputExpr: network_name
+      - name: subnetwork
+        description: Name of the subnetwork to create resources in.
+        varType: string
+        defaultValue: default
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/subnets
+              version: ">= 9.1"
+            spec:
+              outputExpr: subnets_names[0]
+      - name: network_project
+        description: Name of the project for the network. Useful for shared VPC. Default is var.project_id.
+        varType: string
+        defaultValue: ""
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              version: ">= 9.1"
+            spec:
+              outputExpr: project_id
+      - name: name
+        description: Name for the forwarding rule and prefix for supporting resources.
+        varType: string
+        required: true
+      - name: backends
+        description: List of backends, should be a map of key-value pairs for each backend, must have the 'group' key.
+        varType: |-
+          list(object({
+              group       = string
+              description = optional(string)
+              failover    = optional(bool)
+            }))
+        required: true
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-vm//modules/mig
+              version: ">= 12.0"
+            spec:
+              outputExpr: "{\"group\": instance_group}"
+      - name: session_affinity
+        description: "The session affinity for the backends example: NONE, CLIENT_IP. Default is `NONE`."
+        varType: string
+        defaultValue: NONE
+      - name: ports
+        description: List of ports to forward to backend services. Max is 5. The `ports` or `all_ports` are mutually exclusive.
+        varType: list(string)
+        defaultValue:
+          - "80"
+      - name: all_ports
+        description: Boolean for all_ports setting on forwarding rule. The `ports` or `all_ports` are mutually exclusive.
+        varType: bool
+        defaultValue: false
+      - name: health_check
+        description: Health check to determine whether instances are responsive and able to do work
+        varType: |-
+          object({
+              type                = string
+              check_interval_sec  = optional(number)
+              healthy_threshold   = optional(number)
+              timeout_sec         = optional(number)
+              unhealthy_threshold = optional(number)
+              response            = optional(string)
+              proxy_header        = optional(string)
+              port                = optional(number, 80)
+              port_name           = optional(string)
+              request             = optional(string)
+              request_path        = optional(string)
+              host                = optional(string)
+              enable_log          = optional(bool, false)
+            })
+        required: true
+      - name: source_tags
+        description: List of source tags for traffic between the internal load balancer.
+        varType: list(string)
+        defaultValue: []
+      - name: target_tags
+        description: List of target tags for traffic between the internal load balancer.
+        varType: list(string)
+        defaultValue: []
+      - name: source_ip_ranges
+        description: List of source ip ranges for traffic between the internal load balancer.
+        varType: list(string)
+      - name: source_service_accounts
+        description: List of source service accounts for traffic between the internal load balancer.
+        varType: list(string)
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
+              version: ">= 4.4"
+            spec:
+              outputExpr: email
+      - name: target_service_accounts
+        description: List of target service accounts for traffic between the internal load balancer.
+        varType: list(string)
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
+              version: ">= 4.4"
+            spec:
+              outputExpr: email
+      - name: ip_address
+        description: IP address of the internal load balancer, if empty one will be assigned. Default is empty.
+        varType: string
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-address//modules/ip_address
+              version: ">= 4.0"
+            spec:
+              outputExpr: addresses[0]
+      - name: ip_protocol
+        description: The IP protocol for the backend and frontend forwarding rule. TCP or UDP.
+        varType: string
+        defaultValue: TCP
+      - name: service_label
+        description: Service label is used to create internal DNS name
+        varType: string
+      - name: connection_draining_timeout_sec
+        description: Time for which instance will be drained
+        varType: number
+      - name: create_backend_firewall
+        description: Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately.
+        varType: bool
+        defaultValue: true
+      - name: create_health_check_firewall
+        description: Controls if firewall rules for the health check will be created or not. If this rule is not present backend healthcheck will fail.
+        varType: bool
+        defaultValue: true
+      - name: firewall_enable_logging
+        description: Controls if firewall rules that are created are to have logging configured. This will be ignored for firewall rules that are not created.
+        varType: bool
+        defaultValue: false
+      - name: labels
+        description: The labels to attach to resources created by this module.
+        varType: map(string)
+        defaultValue: {}
+      - name: is_mirroring_collector
+        description: Indicates whether or not this load balancer can be used as a collector for packet mirroring. This can only be set to true for load balancers that have their loadBalancingScheme set to INTERNAL.
+        varType: bool
+        defaultValue: false
+    outputs:
+      - name: forwarding_rule
+        description: The forwarding rule self_link.
+        type: string
+      - name: forwarding_rule_id
+        description: The forwarding rule id.
+        type: string
+      - name: ip_address
+        description: The internal IP assigned to the regional forwarding rule.
+        type: string
+  requirements:
     roles:
-    - roles/owner
-    - roles/compute.networkAdmin
-    - roles/compute.loadBalancerAdmin
-    - roles/compute.securityAdmin
-  services:
-  - cloudresourcemanager.googleapis.com
-  - storage-api.googleapis.com
-  - serviceusage.googleapis.com
-  - compute.googleapis.com
+      - level: Project
+        roles:
+          - roles/compute.networkAdmin
+          - roles/compute.loadBalancerAdmin
+          - roles/compute.securityAdmin
+    services:
+      - cloudresourcemanager.googleapis.com
+      - storage-api.googleapis.com
+      - serviceusage.googleapis.com
+      - compute.googleapis.com
+    providerVersions:
+      - source: hashicorp/google
+        version: ">= 4.26, < 8"
+      - source: hashicorp/google-beta
+        version: ">= 4.26, < 8"
