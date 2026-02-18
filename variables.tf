@@ -102,7 +102,7 @@ variable "health_check" {
 variable "source_tags" {
   description = "List of source tags for traffic between the internal load balancer."
   type        = list(string)
-  default     = []
+  default     = ["allow-ingress"]
 }
 
 variable "target_tags" {

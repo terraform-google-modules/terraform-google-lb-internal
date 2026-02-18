@@ -55,7 +55,7 @@ spec:
         defaultValue: default
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              source: github.com/terraform-google-modules/terraform-google-network
               version: ">= 9.1"
             spec:
               outputExpr: network_name
@@ -65,7 +65,7 @@ spec:
         defaultValue: default
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network//modules/subnets
+              source: github.com/terraform-google-modules/terraform-google-network
               version: ">= 9.1"
             spec:
               outputExpr: subnets_names[0]
@@ -75,7 +75,7 @@ spec:
         defaultValue: ""
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network//modules/vpc
+              source: github.com/terraform-google-modules/terraform-google-network
               version: ">= 9.1"
             spec:
               outputExpr: project_id
@@ -133,7 +133,8 @@ spec:
       - name: source_tags
         description: List of source tags for traffic between the internal load balancer.
         varType: list(string)
-        defaultValue: []
+        defaultValue:
+          - allow-ingress
       - name: target_tags
         description: List of target tags for traffic between the internal load balancer.
         varType: list(string)
