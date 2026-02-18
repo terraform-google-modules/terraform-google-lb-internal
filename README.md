@@ -86,7 +86,11 @@ module "gce-ilb" {
 | session\_affinity | The session affinity for the backends example: NONE, CLIENT\_IP. Default is `NONE`. | `string` | `"NONE"` | no |
 | source\_ip\_ranges | List of source ip ranges for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | source\_service\_accounts | List of source service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
+<<<<<<< HEAD
 | source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | <pre>[<br>  "allow-ingress"<br>]</pre> | no |
+=======
+| source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
+>>>>>>> 0fc38c9 (feat!: Make ILB adc compliant. Change input variable project to project_id (#167))
 | subnetwork | Name of the subnetwork to create resources in. | `string` | `"default"` | no |
 | target\_service\_accounts | List of target service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |

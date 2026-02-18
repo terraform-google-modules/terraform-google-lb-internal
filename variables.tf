@@ -102,7 +102,11 @@ variable "health_check" {
 variable "source_tags" {
   description = "List of source tags for traffic between the internal load balancer."
   type        = list(string)
+<<<<<<< HEAD
   default     = ["allow-ingress"]
+=======
+  default     = []
+>>>>>>> 0fc38c9 (feat!: Make ILB adc compliant. Change input variable project to project_id (#167))
 }
 
 variable "target_tags" {
