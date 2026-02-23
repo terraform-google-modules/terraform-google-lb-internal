@@ -42,6 +42,16 @@ variable "subnetwork" {
   default     = "default"
 }
 
+variable "subnets" {
+  description = "Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided."
+  type = list(object({
+    id      = string
+    region  = string
+    purpose = string
+  }))
+  default = []
+}
+
 variable "network_project" {
   description = "Name of the project for the network. Useful for shared VPC. Default is var.project_id."
   type        = string
