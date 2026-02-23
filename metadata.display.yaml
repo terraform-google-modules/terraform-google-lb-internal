@@ -22,7 +22,7 @@ spec:
   info:
     title: Internal Load Balancer Terraform Module
     source:
-      repo: https://github.com/terraform-google-modules/terraform-google-lb-internal.git
+      repo: https://github.com/vandnagarggoogle/terraform-google-lb-internal.git
       sourceType: git
   ui:
     input:
@@ -51,12 +51,23 @@ spec:
         health_check:
           name: health_check
           title: Health Check
+          altDefaults:
+            - type: ALTERNATE_TYPE_DC
+              value:
+                type: http
         ip_address:
           name: ip_address
           title: Ip Address
+          regexValidation: (([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
+          validation: Must be a valid IPv4 address (e.g., 10.140.0.100)
         ip_protocol:
           name: ip_protocol
           title: Ip Protocol
+          enumValueLabels:
+            - label: TCP
+              value: TCP
+            - label: UDP
+              value: UDP
         is_mirroring_collector:
           name: is_mirroring_collector
           title: Is Mirroring Collector
@@ -66,15 +77,23 @@ spec:
         name:
           name: name
           title: Name
+          regexValidation: ^[a-z][a-z0-9-]{4,28}[a-z0-9]$
+          validation: Name must be 6–30 characters, start with a lowercase letter, and contain only lowercase letters, numbers, or hyphens. It must end with a lowercase letter or number.
         network:
           name: network
           title: Network
+          regexValidation: ^(projects\/[a-z0-9\-]+\/global\/networks\/[a-zA-Z0-9\-_]+|[a-zA-Z0-9\-_]+)$
+          validation: Network must be a valid network name or a full resource path.
+          level: 1
         network_project:
           name: network_project
           title: Network Project
         ports:
           name: ports
           title: Ports
+          regexValidation: ^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$
+          validation: Must be a valid port number between 1 and 65535.
+          level: 1
         project_id:
           name: project_id
           title: Project Id
@@ -84,27 +103,43 @@ spec:
         service_label:
           name: service_label
           title: Service Label
+          regexValidation: ^[a-z]([-a-z0-9]*[a-z0-9])?$
+          validation: Service label must be 1–63 characters, start with a lowercase letter, and contain only lowercase letters, numbers, or hyphens. It cannot end with a hyphen.
         session_affinity:
           name: session_affinity
           title: Session Affinity
         source_ip_ranges:
           name: source_ip_ranges
           title: Source Ip Ranges
+          level: 1
         source_service_accounts:
           name: source_service_accounts
           title: Source Service Accounts
+          level: 1
         source_tags:
           name: source_tags
           title: Source Tags
+          level: 1
         subnets:
           name: subnets
           title: Subnets
         subnetwork:
           name: subnetwork
           title: Subnetwork
+          level: 1
         target_service_accounts:
           name: target_service_accounts
           title: Target Service Accounts
+          level: 1
         target_tags:
           name: target_tags
           title: Target Tags
+          level: 1
+    runtime:
+      outputs:
+        forwarding_rule:
+          visibility: VISIBILITY_ROOT
+        forwarding_rule_id:
+          visibility: VISIBILITY_ROOT
+        ip_address:
+          visibility: VISIBILITY_ROOT
