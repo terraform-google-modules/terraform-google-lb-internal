@@ -24,7 +24,7 @@ spec:
     source:
       repo: https://github.com/vandnagarggoogle/terraform-google-lb-internal.git
       sourceType: git
-    version: 1.0.20
+    version: 1.0.21
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -63,12 +63,6 @@ spec:
         description: Name of the subnetwork to create resources in.
         varType: string
         defaultValue: default
-        connections:
-          - source:
-              source: github.com/terraform-google-modules/terraform-google-network
-              version: ">= 9.1"
-            spec:
-              outputExpr: subnets_names[0]
       - name: subnets
         description: "Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided."
         varType: |-
@@ -78,6 +72,12 @@ spec:
               purpose = string
             }))
         defaultValue: []
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network
+              version: ">= 9.1"
+            spec:
+              outputExpr: subnets_by_region_purpose 
       - name: network_project
         description: Name of the project for the network. Useful for shared VPC. Default is var.project_id.
         varType: string
