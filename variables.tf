@@ -124,7 +124,7 @@ variable "target_tags" {
 variable "source_ip_ranges" {
   description = "List of source ip ranges for traffic between the internal load balancer."
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "source_service_accounts" {

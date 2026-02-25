@@ -28,7 +28,7 @@ locals {
   )
 
   resolved_source_ip_ranges = (
-    length(try(var.source_ip_ranges, [])) > 0 ? var.source_ip_ranges :
+    try(length(var.source_ip_ranges), 0) > 0 ? var.source_ip_ranges :
     try(
       [
         for s in var.subnets : s.ip_cidr_range
