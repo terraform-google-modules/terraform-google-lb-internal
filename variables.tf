@@ -182,3 +182,12 @@ variable "is_mirroring_collector" {
   default     = false
   type        = bool
 }
+
+variable "log_config" {
+  description = "This field denotes the logging options for the load balancer traffic served by this backend service."
+  type = object({
+    enable      = bool
+    sample_rate = number
+  })
+  default = { enable = true, sample_rate = 1.0 }
+}
