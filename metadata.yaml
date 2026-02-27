@@ -41,8 +41,8 @@ spec:
         defaultValue: default
         connections:
           - source:
-              source: github.com/Daisyprakash/terraform-google-network
-              version: ">= 15.2.1"
+              source: github.com/terraform-google-modules/terraform-google-network
+              version: ">= 16.0.1"
             spec:
               outputExpr: network_name
       - name: subnetwork
