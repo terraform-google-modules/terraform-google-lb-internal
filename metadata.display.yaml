@@ -120,6 +120,9 @@ spec:
           name: source_tags
           title: Source Tags
           level: 1
+        subnets:
+          name: subnets
+          title: Subnets
         subnetwork:
           name: subnetwork
           title: Subnetwork
@@ -132,3 +135,11 @@ spec:
           name: target_tags
           title: Target Tags
           level: 1
+    runtime:
+      outputs:
+        forwarding_rule:
+          visibility: VISIBILITY_ROOT
+        forwarding_rule_id:
+          visibility: VISIBILITY_ROOT
+        ip_address:
+          visibility: VISIBILITY_ROOT

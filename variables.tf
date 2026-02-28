@@ -42,6 +42,16 @@ variable "subnetwork" {
   default     = "default"
 }
 
+variable "subnets" {
+  description = "Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided."
+  type = list(object({
+    id      = string
+    region  = string
+    purpose = string
+  }))
+  default = []
+}
+
 variable "network_project" {
   description = "Name of the project for the network. Useful for shared VPC. Default is var.project_id."
   type        = string
@@ -102,7 +112,7 @@ variable "health_check" {
 variable "source_tags" {
   description = "List of source tags for traffic between the internal load balancer."
   type        = list(string)
-  default     = []
+  default     = ["allow-ingress"]
 }
 
 variable "target_tags" {
@@ -114,7 +124,7 @@ variable "target_tags" {
 variable "source_ip_ranges" {
   description = "List of source ip ranges for traffic between the internal load balancer."
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "source_service_accounts" {
