@@ -46,7 +46,6 @@ data "google_compute_network" "network" {
 }
 
 data "google_compute_subnetwork" "network" {
-  count   = var.subnetwork != "" ? 1 : 0
   name    = var.subnetwork
   project = var.network_project == "" ? var.project_id : var.network_project
   region  = var.region
@@ -57,7 +56,7 @@ resource "google_compute_forwarding_rule" "default" {
   name                   = var.name
   region                 = var.region
   network                = data.google_compute_network.network.self_link
-  subnetwork             = var.subnetwork != "" ? data.google_compute_subnetwork.network[0].self_link : local.resolved_subnetwork
+  subnetwork             = var.subnetwork != "" ? data.google_compute_subnetwork.network.self_link : local.resolved_subnetwork
   allow_global_access    = var.global_access
   load_balancing_scheme  = "INTERNAL"
   is_mirroring_collector = var.is_mirroring_collector
