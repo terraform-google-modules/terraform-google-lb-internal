@@ -14,8 +14,32 @@
  * limitations under the License.
  */
 
-# The forwarding rule resource needs the self_link but the firewall rules only need the name.
-# Using a data source here to access both self_link and name by looking up the network name.
+
+locals {
+  resolved_subnetwork = (
+    var.subnetwork != "" ? var.subnetwork :
+    try(
+      [
+        for s in var.subnets : s.id
+        if s.region == var.region && (s.purpose == "PRIVATE")
+      ][0],
+      ""
+    )
+  )
+
+  resolved_source_ip_ranges = (
+    try(length(var.source_ip_ranges), 0) > 0 ? var.source_ip_ranges :
+    try(
+      [
+        for s in var.subnets : s.ip_cidr_range
+        if s.region == var.region && (s.purpose == "REGIONAL_MANAGED_PROXY")
+      ],
+      []
+    )
+  )
+}
+
+
 data "google_compute_network" "network" {
   name    = var.network
   project = var.network_project == "" ? var.project_id : var.network_project
@@ -32,7 +56,7 @@ resource "google_compute_forwarding_rule" "default" {
   name                   = var.name
   region                 = var.region
   network                = data.google_compute_network.network.self_link
-  subnetwork             = data.google_compute_subnetwork.network.self_link
+  subnetwork             = var.subnetwork != "" ? data.google_compute_subnetwork.network.self_link : local.resolved_subnetwork
   allow_global_access    = var.global_access
   load_balancing_scheme  = "INTERNAL"
   is_mirroring_collector = var.is_mirroring_collector
@@ -165,7 +189,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
     ports    = var.ports
   }
 
-  source_ranges           = var.source_ip_ranges
+  source_ranges           = local.resolved_source_ip_ranges
   source_tags             = length(var.source_tags) > 0 ? var.source_tags : null
   source_service_accounts = var.source_service_accounts
   target_tags             = length(var.target_tags) > 0 ? var.target_tags : null
