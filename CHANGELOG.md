@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.0.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v9.0.0...v9.0.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* handle null and empty subnetwork in ILB forwarding rule ([#172](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/172)) ([262cb75](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/262cb75f1ae72f19b6f48fea6376774f5dfa1036))
+
 ## [9.0.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v8.0.0...v9.0.0) (2026-03-03)
 
 
