@@ -39,7 +39,7 @@ control 'minimal' do
     its('allowed_ssh?') { should be false }
     its('allowed_http?') { should be false }
     it { should_not allow_ip_ranges ['0.0.0.0/0'] }
-    it { should allow_ip_ranges_only ['130.211.0.0/22', '35.191.0.0/16'] }
+    it { should allow_ip_ranges_only ['130.211.0.0/22', '35.191.0.0/16' , '34.124.104.0/22'] }
   end
 
   describe google_compute_forwarding_rule(project: project_id, region: region, name: "#{resource_name_prefix}") do
