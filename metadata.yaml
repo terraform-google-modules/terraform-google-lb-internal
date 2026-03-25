@@ -175,7 +175,7 @@ spec:
         varType: string
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-address//modules/ip_address
+              source: github.com/terraform-google-modules/terraform-google-address
               version: ">= 4.0"
             spec:
               outputExpr: addresses[0]
