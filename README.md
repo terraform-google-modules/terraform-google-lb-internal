@@ -88,7 +88,7 @@ module "gce-ilb" {
 | source\_service\_accounts | List of source service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | source\_tags | List of source tags for traffic between the internal load balancer. | `list(string)` | <pre>[<br>  "allow-ingress"<br>]</pre> | no |
 | subnets | Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided. | <pre>list(object({<br>    id      = string<br>    region  = string<br>    purpose = string<br>    ip_cidr_range = string<br>  }))</pre> | `[]` | no |
-| subnetwork | Name of the subnetwork to create resources in. | `string` | `"default"` | no |
+| subnetwork | Name of the subnetwork to create resources in. | `string` | `""` | no |
 | target\_service\_accounts | List of target service accounts for traffic between the internal load balancer. | `list(string)` | `null` | no |
 | target\_tags | List of target tags for traffic between the internal load balancer. | `list(string)` | `[]` | no |
 

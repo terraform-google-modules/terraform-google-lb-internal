@@ -62,7 +62,7 @@ spec:
       - name: subnetwork
         description: Name of the subnetwork to create resources in.
         varType: string
-        defaultValue: default
+        defaultValue: ""
       - name: subnets
         description: "Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided."
         varType: |-
