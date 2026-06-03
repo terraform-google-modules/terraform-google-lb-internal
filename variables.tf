@@ -48,6 +48,7 @@ variable "subnets" {
     id      = string
     region  = string
     purpose = string
+    ip_cidr_range = string
   }))
   default = []
 }
