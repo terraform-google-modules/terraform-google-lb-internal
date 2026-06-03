@@ -39,7 +39,7 @@ variable "network" {
 variable "subnetwork" {
   description = "Name of the subnetwork to create resources in."
   type        = string
-  default     = "default"
+  default     = ""
 }
 
 variable "subnets" {
