@@ -55,7 +55,7 @@ spec:
         defaultValue: default
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network
+              source: github.com/Daisyprakash/terraform-google-network
               version: ">= 16.0.1"
             spec:
               outputExpr: network_name
@@ -74,7 +74,7 @@ spec:
         defaultValue: []
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network
+              source: github.com/Daisyprakash/terraform-google-network
               version: ">= 16.0.1"
             spec:
               outputExpr: subnets_by_region_purpose
@@ -84,7 +84,7 @@ spec:
         defaultValue: ""
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-network
+              source: github.com/Daisyprakash/terraform-google-network
               version: ">= 16.0.1"
             spec:
               outputExpr: project_id
