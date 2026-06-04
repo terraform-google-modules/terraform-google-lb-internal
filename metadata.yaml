@@ -76,7 +76,7 @@ spec:
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-network
-              version: ">= 18.1.0"
+              version: ">= 18.1.1"
             spec:
               outputExpr: subnets_by_region_purpose_ip_cidr_range
       - name: network_project
