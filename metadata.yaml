@@ -78,7 +78,7 @@ spec:
               source: github.com/terraform-google-modules/terraform-google-network
               version: ">= 18.1.1"
             spec:
-              outputExpr: subnets_by_region_purpose_ip_cidr_range
+              outputExpr: subnets_overview
       - name: network_project
         description: Name of the project for the network. Useful for shared VPC. Default is var.project_id.
         varType: string
