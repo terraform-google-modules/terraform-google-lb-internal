@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.0.4](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v9.0.3...v9.0.4) (2026-06-05)
+
+
+### Bug Fixes
+
+* added missing input field and remove default value for subnet ([#178](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/178)) ([cce6335](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/cce63355f2109eaff94759999b7acfb51d1cfc04))
+
 ## [9.0.3](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v9.0.2...v9.0.3) (2026-03-25)
 
 
