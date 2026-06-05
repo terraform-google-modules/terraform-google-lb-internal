@@ -62,22 +62,23 @@ spec:
       - name: subnetwork
         description: Name of the subnetwork to create resources in.
         varType: string
-        defaultValue: default
+        defaultValue: ""
       - name: subnets
         description: "Optional: A map containing subnet details Used to derive the subnetwork URI if subnetwork is not provided."
         varType: |-
           list(object({
-              id      = string
-              region  = string
-              purpose = string
+              id            = string
+              region        = string
+              purpose       = string
+              ip_cidr_range = string
             }))
         defaultValue: []
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-network
-              version: ">= 16.0.1"
+              version: ">= 18.1.1"
             spec:
-              outputExpr: subnets_by_region_purpose
+              outputExpr: subnets_overview
       - name: network_project
         description: Name of the project for the network. Useful for shared VPC. Default is var.project_id.
         varType: string
