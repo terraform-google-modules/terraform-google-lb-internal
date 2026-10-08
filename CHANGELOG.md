@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.1.1](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v9.1.0...v9.1.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* populate null defaultValue in internal-load-balancer blueprint metadata ([#184](https://github.com/terraform-google-modules/terraform-google-lb-internal/issues/184)) ([9c7dd1d](https://github.com/terraform-google-modules/terraform-google-lb-internal/commit/9c7dd1dab4e071c92b3de0c674bfbed2cb4e64e6))
+
 ## [9.1.0](https://github.com/terraform-google-modules/terraform-google-lb-internal/compare/v9.0.4...v9.1.0) (2026-09-09)
 
 
