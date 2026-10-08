@@ -156,6 +156,7 @@ spec:
       - name: source_service_accounts
         description: List of source service accounts for traffic between the internal load balancer.
         varType: list(string)
+        defaultValue: null
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
@@ -165,6 +166,7 @@ spec:
       - name: target_service_accounts
         description: List of target service accounts for traffic between the internal load balancer.
         varType: list(string)
+        defaultValue: null
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-service-accounts//modules/simple-sa
@@ -174,6 +176,7 @@ spec:
       - name: ip_address
         description: IP address of the internal load balancer, if empty one will be assigned. Default is empty.
         varType: string
+        defaultValue: null
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-address
@@ -187,9 +190,11 @@ spec:
       - name: service_label
         description: Service label is used to create internal DNS name
         varType: string
+        defaultValue: null
       - name: connection_draining_timeout_sec
         description: Time for which instance will be drained
         varType: number
+        defaultValue: null
       - name: create_backend_firewall
         description: Controls if firewall rules for the backends will be created or not. Health-check firewall rules are controlled separately.
         varType: bool
